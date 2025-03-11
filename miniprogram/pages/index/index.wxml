@@ -1,0 +1,19 @@
+<!-- index.wxml -->
+<view class="container" style="">
+    <image class="container-image" src="../../images/icons/logo.png" mode="aspectFill"></image>
+    <!-- 图片展示区域 -->
+    <view class="preview-container" bindtap="downloadImage">
+        <image class="preview-image" src="{{imageUrl}}" mode="aspectFit" bindload="onImageLoad" />
+    </view>
+    <!-- 输入内容浮动效果 -->
+    <view wx:if="{{showFloatText}}" class="float-text-animation">{{inputContent}}</view>
+    <!-- 底部输入栏 -->
+    <view class="input-container">
+        <input class="input-box" value="{{inputContent}}" placeholder="输入内容，心想视成" placeholder-class="placeholder" bindinput="onInputChange" confirm-type="done" />
+        <view class="generate-btn" bindtap="generateImage">
+            <image class="logo-icon" src="/images/icons/generate.png" />
+        </view>
+    </view>
+    <!-- 新增底部文字 -->
+    <view class="ai-generated-text">AI生成，仅供参考</view>
+</view>
