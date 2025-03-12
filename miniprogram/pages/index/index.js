@@ -11,12 +11,15 @@ Page({
     onLoad() {
       const cache = wx.getStorageSync('userData');
       if (cache && cache.expire > Date.now()) {
-        this.setData({ remainTimes: cache.remainTimes });
-        getApp().globalData.remainTimes = cache.remainTimes;
+        let tmpTimes = cache.remainTimes;
+        if(!tmpTimes){
+          tmpTimes = 0;
+        }
+        this.setData({ remainTimes: tmpTimes });
+        getApp().globalData.remainTimes = tmpTimes;
       } else {
         // 首次访问初始化为3次
         const initTimes = 3;
-        this.setData({ remainTimes: initTimes });
         this.addRemainTimes(initTimes);
       }
     },
