@@ -5,7 +5,32 @@ Page({
       imageUrl: '',
       isLoading: false,
       errorMsg: '',
-      isGenerating: false
+      isGenerating: false,
+      remainTimes: 0,
+    },
+    onLoad() {
+      const cache = wx.getStorageSync('userData');
+      if (cache && cache.expire > Date.now()) {
+        this.setData({ remainTimes: cache.remainTimes });
+        getApp().globalData.remainTimes = cache.remainTimes;
+      } else {
+        // 首次访问初始化为3次
+        const initTimes = 3;
+        this.setData({ remainTimes: initTimes });
+        this.addRemainTimes(initTimes);
+      }
+    },
+    // 增加剩余次数
+    addRemainTimes(times) {
+      const expire = Date.now() + 86400000; // 24小时过期
+      const cache = wx.getStorageSync('userData');
+      times = cache.remainTimes+times;
+      wx.setStorageSync('userData', {
+        remainTimes: times,
+        expire: expire
+      });
+      this.setData({ remainTimes: times });
+      getApp().globalData.remainTimes = times;
     },
   
     onInputChange(e) {
@@ -13,11 +38,15 @@ Page({
     },
   
     generateImage() {
+      if (this.data.remainTimes <= 0) {
+        wx.showToast({ title: '次数用完啦，去获取次数吧！', icon: 'none' });
+        return;
+      }
       if (this.data.isGenerating) {
         wx.showToast({ title: '正在生成，请勿重复点击', icon: 'none' });
         return;
       }
-      const content = this.data.inputContent.trim();
+      const content = this.data.inputContent;
       if (!content) {
         wx.showToast({ title: '请输入内容', icon: 'none' });
         return;
@@ -28,10 +57,22 @@ Page({
       this.setData({ showFloatText: true });
       // 隐藏旧图片
       this.setData({ imageUrl: '' });
+      wx.showToast({ title: '正在生成，请稍候~', icon: 'none' });
+      // 请求生成图片
+      this.requestGenerateImage(content);
+    },
+    // 分享回调
+    onShareAppMessage() {
       setTimeout(() => {
-        this.setData({ showFloatText: false });
-        this.requestGenerateImage(content);
+        this.addRemainTimes(1);
       }, 1000);
+      return {
+        title: 'AI图片生成神器，输入文字秒出图！',
+        path: '/pages/index/index',
+        success: (res) => {
+          console.log('分享成功', res);
+        }
+      };
     },
   
     requestGenerateImage(prompt) {
@@ -74,8 +115,13 @@ Page({
           this.handleError('请求失败，请检查网络');
         },
         complete: () => {
-          this.setData({ isLoading: false });
-          this.setData({ isGenerating: false });
+          setTimeout(() => {
+            //减次数
+            this.addRemainTimes(-1);
+            this.setData({ showFloatText: false });
+            this.setData({ isLoading: false });
+            this.setData({ isGenerating: false });
+          }, 1000);
         }
       });
     },

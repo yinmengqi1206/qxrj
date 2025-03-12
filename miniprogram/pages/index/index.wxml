@@ -1,17 +1,25 @@
 <!-- index.wxml -->
 <view class="container" style="">
-    <image class="container-image" src="../../images/icons/logo.png" mode="aspectFill"></image>
+    <image class="container-image" src="/images/icons/logo.png" mode="aspectFill"></image>
     <!-- 图片展示区域 -->
     <view class="preview-container" bindtap="downloadImage">
         <image class="preview-image" src="{{imageUrl}}" mode="aspectFit" bindload="onImageLoad" />
     </view>
     <!-- 输入内容浮动效果 -->
     <view wx:if="{{showFloatText}}" class="float-text-animation">{{inputContent}}</view>
+    <!-- 分享按钮 -->
+    <view class="floating-share-btn">
+        <button class="share-btn-wrapper" open-type="share"></button>
+        <image class="share-btn" src="/images/icons/share.png" />
+        <view class="mark">+1</view>
+    </view>
     <!-- 底部输入栏 -->
     <view class="input-container">
         <input class="input-box" value="{{inputContent}}" placeholder="输入内容，心想视成" placeholder-class="placeholder" bindinput="onInputChange" confirm-type="done" />
         <view class="generate-btn" bindtap="generateImage">
             <image class="logo-icon" src="/images/icons/generate.png" />
+            <!-- 显示 remainTimes 数字 -->
+            <view class="mark">{{remainTimes}}</view>
         </view>
     </view>
     <!-- 新增底部文字 -->

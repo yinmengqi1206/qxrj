@@ -97,6 +97,33 @@
   transition: all 0.3s;
 }
 
+/* 数字徽标 */
+.mark {
+  color: #1afa29;
+  position: absolute;
+  top: -15rpx; /* 调整位置 */
+  right: -10rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  padding: 0 8rpx;
+  background: #ff4d4f; /* 红色背景 */
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  border: 2rpx solid #fff; /* 白色边框 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+}
+
+.generate-btn {
+  position: relative;
+  width: fit-content; /* 自适应内容宽度 */
+}
+
 .generate-btn:active .logo-icon {
   transform: scale(0.9);
   opacity: 0.8;
@@ -131,4 +158,31 @@
   border-radius: 20rpx;
   backdrop-filter: blur(10px); /* 毛玻璃效果 */
   text-align: center;
+}
+
+/* 悬浮气泡容器 */
+.floating-share-btn {
+  position: fixed;
+  right: 20rpx;
+  bottom: 100rpx;
+  z-index: 9999;
+  transition: all 0.3s ease;
+}
+
+/* 分享按钮容器 */
+.share-btn-wrapper {
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  background: transparent;
+  border: none;
+  padding: 0;
+  opacity: 0; /* 让 button 完全透明 */
+}
+
+/* 分享图标 */
+.share-btn {
+  width: 100rpx;
+  height: 100rpx;
+  transition: all 0.2s ease;
 }
