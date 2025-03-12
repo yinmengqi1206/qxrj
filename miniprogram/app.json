@@ -3,9 +3,9 @@
     "pages/index/index"
   ],
   "window": {
-    "backgroundColor": "#F5DF7C",
+    "backgroundColor": "#F7E48F",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F5DF7C",
+    "navigationBarBackgroundColor": "#F7E48F",
     "navigationBarTitleText": "AI心想视成",
     "navigationBarTextStyle": "black"
   },
