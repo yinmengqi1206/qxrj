@@ -3,7 +3,16 @@
     <image class="container-image" src="/images/icons/logo.png" mode="aspectFill"></image>
     <!-- 图片展示区域 -->
     <view class="preview-container" bindtap="downloadImage">
-        <image class="preview-image" src="{{imageUrl}}" mode="aspectFit" bindload="onImageLoad" />
+        <image hidden="{{!imageUrl}}" class="preview-image" src="{{imageUrl}}" mode="aspectFit" bindload="onImageLoad" />
+        <!-- 新增内容 -->
+        <view hidden="{{imageUrl}}" class="preview-text">
+            <view>《AI心想视成》</view>
+            <view>生成图片遇广告，</view>
+            <view>辛苦耐心稍等待，</view>
+            <view>每日三次是上限，</view>
+            <view>生成图片及时存。</view>
+            <view>祝您心想事成❤！</view>
+        </view>
     </view>
     <!-- 输入内容浮动效果 -->
     <view wx:if="{{showFloatText}}" class="float-text-animation">{{inputContent}}</view>

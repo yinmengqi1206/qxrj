@@ -9,31 +9,31 @@ Page({
       remainTimes: 0,
     },
     onLoad() {
-      const cache = wx.getStorageSync('userData');
-      if (cache && cache.expire > Date.now()) {
-        let tmpTimes = cache.remainTimes;
-        if(!tmpTimes){
-          tmpTimes = 0;
-        }
-        this.setData({ remainTimes: tmpTimes });
-        getApp().globalData.remainTimes = tmpTimes;
+      const initTimes = wx.getStorageSync('remainTimes');
+      if (initTimes) {
+        this.setData({ remainTimes: initTimes });
       } else {
         // 首次访问初始化为3次
         const initTimes = 3;
         this.addRemainTimes(initTimes);
       }
+
+      // 每天重置 maxAdCount
+      const lastResetDate = wx.getStorageSync('lastResetDate');
+      const today = new Date().toDateString();
+      console.log('lastResetDate:', lastResetDate);
+      console.log('today:', today);
+      if (lastResetDate !== today) {
+        wx.setStorageSync('maxAdCount', 0);
+        wx.setStorageSync('lastResetDate', today);
+      }
     },
     // 增加剩余次数
     addRemainTimes(times) {
-      const expire = Date.now() + 86400000; // 24小时过期
-      const cache = wx.getStorageSync('userData');
-      times = cache.remainTimes+times;
-      wx.setStorageSync('userData', {
-        remainTimes: times,
-        expire: expire
-      });
+      const remainTimes = parseInt(wx.getStorageSync('remainTimes'),0);
+      times = remainTimes + times;
+      wx.setStorageSync('remainTimes',times);
       this.setData({ remainTimes: times });
-      getApp().globalData.remainTimes = times;
     },
   
     onInputChange(e) {
@@ -54,6 +54,30 @@ Page({
         wx.showToast({ title: '请输入内容', icon: 'none' });
         return;
       }
+  
+      // 检查已生成次数
+      const generatedCount = wx.getStorageSync('generatedCount') || 0;
+      const maxAdCount = wx.getStorageSync('maxAdCount') || 0;
+      if (generatedCount >= 3 && maxAdCount <= 3) {
+        wx.showModal({
+          title: '提示',
+          content: '观看广告，继续使用！',
+          success: (res) => {
+            if (res.confirm) {
+              // 清零已生成次数
+              wx.setStorageSync('generatedCount', 0);
+              //增加最大次数
+              wx.setStorageSync('maxAdCount', maxAdCount+1);
+              this.startGenerating(content);
+            }
+          }
+        });
+      } else {
+        this.startGenerating(content);
+      }
+    },
+  
+    startGenerating(content) {
       // 执行生成逻辑
       this.setData({ isGenerating: true });
       // 触发浮动动画
@@ -64,6 +88,7 @@ Page({
       // 请求生成图片
       this.requestGenerateImage(content);
     },
+  
     // 分享回调
     onShareAppMessage() {
       setTimeout(() => {
@@ -110,6 +135,9 @@ Page({
           console.log(res);
           if (res.statusCode === 200 && res.data.images?.[0]?.url) {
             this.setData({ imageUrl: res.data.images[0].url });
+            // 增加已生成次数
+            const generatedCount = wx.getStorageSync('generatedCount') || 0;
+            wx.setStorageSync('generatedCount', generatedCount + 1);
           } else {
             this.handleError('生成失败，请稍后重试');
           }

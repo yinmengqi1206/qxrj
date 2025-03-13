@@ -15,8 +15,5 @@ App({
     }
 
     this.globalData = {};
-  },
-  globalData: {
-    remainTimes: 0 // 初始次数
-  },
+  }
 });

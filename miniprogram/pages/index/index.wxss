@@ -152,8 +152,8 @@
   bottom: 20rpx; /* 距离底部距离 */
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255,255,255,0.6); /* 半透明白色 */
-  font-size: 24rpx;
+  color: red;
+  font-size: 30rpx;
   background: rgba(0,0,0,0.3); /* 半透明背景 */
   padding: 8rpx 24rpx;
   border-radius: 20rpx;
@@ -186,4 +186,14 @@
   width: 100rpx;
   height: 100rpx;
   transition: all 0.2s ease;
+}
+
+.preview-text {
+  font-family:"华文楷体";  /*设置字体*/
+  margin:10px auto;   /*设置外边距*/
+  padding:30px;   /*设置内边距*/
+  font-size: 36px;  /*设置文字大小*/
+  color:red;  /*设置文字颜色*/
+  text-align: center; /*设置文字居中*/  
+  writing-mode:vertical-rl;  /*设置以垂直方式从右向左显示*/
 }
