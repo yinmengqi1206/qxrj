@@ -10,11 +10,10 @@ Page({
     },
     onLoad() {
       const remainTimes = wx.getStorageSync('remainTimes');
+      //第一次使用，给默认3次
       if (typeof remainTimes !== 'number' || isNaN(remainTimes)) {
           // 首次访问初始化为3次
-          this.addRemainTimes(3);
-      }else {
-        this.setData({ remainTimes: remainTimes });
+          this.addRemainTimes(getApp().globalData.defaultCount);
       }
 
       // 新的一天
@@ -22,10 +21,13 @@ Page({
       const today = new Date().toDateString();
       if (lastResetDate !== today) {
         //设置为3次
-        wx.setStorageSync('remainTimes', 3);
+        wx.setStorageSync('remainTimes', getApp().globalData.defaultCount);
+        this.setData({ remainTimes: getApp().globalData.defaultCount});
         //清零最大广告次数
         wx.setStorageSync('maxAdCount', 0);
         wx.setStorageSync('lastResetDate', today);
+      }else{
+        this.setData({ remainTimes: remainTimes });
       }
     },
     // 增加剩余次数
@@ -117,13 +119,13 @@ Page({
       this.setData({ isLoading: true, errorMsg: '' });
   
       // 替换为你的实际API Token
-      const token = 'sk-cazwnotrizbodsuzkoexkyqjohveftjatrnjdnsxwumivlpw';
+      const apiKey = getApp().globalData.apiKey;
       
       wx.request({
         url: 'https://api.siliconflow.cn/v1/images/generations',
         method: 'POST',
         header: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${apiKey}`,
           'Content-Type': 'application/json'
         },
         data: {
