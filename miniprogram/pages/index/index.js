@@ -9,18 +9,21 @@ Page({
       remainTimes: 0,
     },
     onLoad() {
-      const initTimes = wx.getStorageSync('remainTimes');
-      if (typeof initTimes !== 'number' || isNaN(initTimes)) {
+      const remainTimes = wx.getStorageSync('remainTimes');
+      if (typeof remainTimes !== 'number' || isNaN(remainTimes)) {
           // 首次访问初始化为3次
           this.addRemainTimes(3);
       }else {
-        this.setData({ remainTimes: initTimes });
+        this.setData({ remainTimes: remainTimes });
       }
 
-      // 每天重置 maxAdCount
+      // 新的一天
       const lastResetDate = wx.getStorageSync('lastResetDate');
       const today = new Date().toDateString();
       if (lastResetDate !== today) {
+        //设置为3次
+        wx.setStorageSync('remainTimes', 3);
+        //清零最大广告次数
         wx.setStorageSync('maxAdCount', 0);
         wx.setStorageSync('lastResetDate', today);
       }
@@ -56,6 +59,10 @@ Page({
       const generatedCount = wx.getStorageSync('generatedCount') || 0;
       const maxAdCount = wx.getStorageSync('maxAdCount') || 0;
       if (generatedCount >= 3 && maxAdCount <= 3) {
+        // 清零已生成次数
+        wx.setStorageSync('generatedCount', 0);
+        //增加最大次数
+        wx.setStorageSync('maxAdCount', maxAdCount+1);
         this.startGenerating(content);
         // wx.showModal({
         //   title: '提示',
