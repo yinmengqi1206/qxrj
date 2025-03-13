@@ -56,19 +56,20 @@ Page({
       const generatedCount = wx.getStorageSync('generatedCount') || 0;
       const maxAdCount = wx.getStorageSync('maxAdCount') || 0;
       if (generatedCount >= 3 && maxAdCount <= 3) {
-        wx.showModal({
-          title: '提示',
-          content: '观看广告，继续使用！',
-          success: (res) => {
-            if (res.confirm) {
-              // 清零已生成次数
-              wx.setStorageSync('generatedCount', 0);
-              //增加最大次数
-              wx.setStorageSync('maxAdCount', maxAdCount+1);
-              this.startGenerating(content);
-            }
-          }
-        });
+        this.startGenerating(content);
+        // wx.showModal({
+        //   title: '提示',
+        //   content: '观看广告，继续使用！',
+        //   success: (res) => {
+        //     if (res.confirm) {
+        //       // 清零已生成次数
+        //       wx.setStorageSync('generatedCount', 0);
+        //       //增加最大次数
+        //       wx.setStorageSync('maxAdCount', maxAdCount+1);
+        //       this.startGenerating(content);
+        //     }
+        //   }
+        // });
       } else {
         this.startGenerating(content);
       }
