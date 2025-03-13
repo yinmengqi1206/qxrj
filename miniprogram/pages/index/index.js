@@ -10,19 +10,16 @@ Page({
     },
     onLoad() {
       const initTimes = wx.getStorageSync('remainTimes');
-      if (!initTimes) {
+      if (typeof initTimes !== 'number' || isNaN(initTimes)) {
+          // 首次访问初始化为3次
+          this.addRemainTimes(3);
+      }else {
         this.setData({ remainTimes: initTimes });
-      } else {
-        // 首次访问初始化为3次
-        const initTimes = 3;
-        this.addRemainTimes(initTimes);
       }
 
       // 每天重置 maxAdCount
       const lastResetDate = wx.getStorageSync('lastResetDate');
       const today = new Date().toDateString();
-      console.log('lastResetDate:', lastResetDate);
-      console.log('today:', today);
       if (lastResetDate !== today) {
         wx.setStorageSync('maxAdCount', 0);
         wx.setStorageSync('lastResetDate', today);
@@ -30,7 +27,7 @@ Page({
     },
     // 增加剩余次数
     addRemainTimes(times) {
-      const remainTimes = parseInt(wx.getStorageSync('remainTimes'),0);
+      const remainTimes = wx.getStorageSync('remainTimes') || 0;
       times = remainTimes + times;
       wx.setStorageSync('remainTimes',times);
       this.setData({ remainTimes: times });
