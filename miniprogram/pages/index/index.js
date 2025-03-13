@@ -10,7 +10,7 @@ Page({
     },
     onLoad() {
       const initTimes = wx.getStorageSync('remainTimes');
-      if (initTimes) {
+      if (!initTimes) {
         this.setData({ remainTimes: initTimes });
       } else {
         // 首次访问初始化为3次
