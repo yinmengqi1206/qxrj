@@ -1,0 +1,160 @@
+/* pages/emotion-selector/emotion-selector.wxss */
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    color: #4b5563;
+    margin-top: -10rpx;
+  }
+  
+  /* 情绪图标样式 */
+  .flower-purple, .flower-indigo, .circle-blue, .flower-yellow, .flower-gold {
+    position: relative;
+    width: 320rpx;
+    height: 320rpx;
+  }
+  
+  /* 紫色花 */
+  .flower-purple::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 128rpx;
+    height: 128rpx;
+    background-color: #a78bfa;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-purple::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-purple {
+    background: radial-gradient(circle, transparent 30%, #ede9fe 30%);
+  }
+  
+  /* 靛蓝色花 */
+  .flower-indigo::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 128rpx;
+    height: 128rpx;
+    background-color: #818cf8;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-indigo::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-indigo {
+    background: radial-gradient(circle, transparent 30%, #e0e7ff 30%);
+  }
+  
+  /* 蓝色圆圈 */
+  .circle-blue::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64rpx;
+    height: 64rpx;
+    background-color: #38bdf8;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .circle-blue::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .circle-blue {
+    background: radial-gradient(circle, transparent 10%, #7dd3fc 10%, #7dd3fc 20%, transparent 20%, transparent 30%, #bae6fd 30%, #bae6fd 40%, transparent 40%, transparent 50%, #e0f2fe 50%, #e0f2fe 60%, transparent 60%);
+  }
+  
+  /* 黄色花 */
+  .flower-yellow::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 128rpx;
+    height: 128rpx;
+    background-color: #facc15;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-yellow::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-yellow {
+    background: radial-gradient(circle, transparent 30%, #fef9c3 30%);
+  }
+  
+  /* 金色花 */
+  .flower-gold::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 128rpx;
+    height: 128rpx;
+    background-color: #fbbf24;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-gold::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16rpx;
+    height: 16rpx;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .flower-gold {
+    background: radial-gradient(circle, transparent 30%, #fef3c7 30%);
+  }

@@ -1,0 +1,22 @@
+/* pages/emotion-factors/emotion-factors.wxss */
+.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8rpx;
+  }
+  
+  .gap-2 > view {
+    margin: 8rpx;
+  }
+  
+  .inline-block {
+    display: inline-block;
+  }
+  
+  .ml-2 {
+    margin-left: 16rpx;
+  }
+  
+  .bg-opacity-30 {
+    opacity: 0.3;
+  }

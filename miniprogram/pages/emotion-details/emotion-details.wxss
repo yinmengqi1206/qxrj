@@ -1,0 +1,18 @@
+/* pages/emotion-details/emotion-details.wxss */
+.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8rpx;
+  }
+  
+  .gap-2 > view {
+    margin: 8rpx;
+  }
+  
+  .inline-block {
+    display: inline-block;
+  }
+  
+  .ml-2 {
+    margin-left: 16rpx;
+  }

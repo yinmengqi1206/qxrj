@@ -1,0 +1,46 @@
+<!-- pages/emotion-details/emotion-details.wxml -->
+<wxs module="includes" src="../../utils/includes.wxs"></wxs>
+<view class="container bg-gray-100">
+    <view class="header p-4 flex items-center bg-white">
+        <view class="back-icon text-blue-500" bindtap="goBack">
+            <text class="cuIcon-back"></text>
+        </view>
+        <view class="title text-xl font-medium text-center flex-1">选择感受</view>
+        <view class="w-6"></view>
+    </view>
+    <view class="p-4">
+        <view class="mb-4 flex items-center">
+            <!-- 情绪图标 -->
+            <view wx:if="{{selectedEmotion.icon === 'flower-purple'}}" class="w-12 h-12 bg-purple-300 rounded-full flex items-center justify-center mr-4">
+                <view class="w-8 h-8 bg-purple-500 rounded-full"></view>
+            </view>
+            <view wx:elif="{{selectedEmotion.icon === 'flower-indigo'}}" class="w-12 h-12 bg-indigo-300 rounded-full flex items-center justify-center mr-4">
+                <view class="w-8 h-8 bg-indigo-500 rounded-full"></view>
+            </view>
+            <view wx:elif="{{selectedEmotion.icon === 'circle'}}" class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center mr-4">
+                <view class="w-8 h-8 bg-sky-400 rounded-full"></view>
+            </view>
+            <view wx:elif="{{selectedEmotion.icon === 'flower-yellow'}}" class="w-12 h-12 bg-yellow-200 rounded-full flex items-center justify-center mr-4">
+                <view class="w-8 h-8 bg-yellow-400 rounded-full"></view>
+            </view>
+            <view wx:elif="{{selectedEmotion.icon === 'flower-gold'}}" class="w-12 h-12 bg-amber-200 rounded-full flex items-center justify-center mr-4">
+                <view class="w-8 h-8 bg-amber-400 rounded-full"></view>
+            </view>
+            <view>
+                <view class="font-medium">{{selectedEmotion.name}}</view>
+                <view class="text-gray-500">{{recordType === 'daily' ? '当日情绪' : '瞬时情绪'}}</view>
+            </view>
+        </view>
+        <view class="bg-white rounded-xl p-4 mb-4">
+            <view class="text-gray-500 mb-4">您的感受是什么？（可多选）</view>
+            <view class="flex flex-wrap">
+                <view wx:for="{{detailOptions}}" wx:key="*this" class="{{includes.includes(selectedDetails,item) ? 'tag tag-selected' : 'tag'}}" data-detail="{{item}}" bindtap="toggleDetail">
+                    {{item}}
+                </view>
+            </view>
+        </view>
+        <view class="fixed-bottom p-4 bg-white">
+            <button bindtap="goNext" class="btn btn-primary w-full">下一步</button>
+        </view>
+    </view>
+</view>

@@ -1,27 +1,528 @@
 /**app.wxss**/
+
+/* 基础样式 */
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #333333;
+  background-color: #f5f5f5;
+}
+
 .container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* 颜色 */
+.bg-white {
+  background-color: #ffffff;
+}
+
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+
+.text-blue-500 {
+  color: #3b82f6;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+
+/* 布局 */
+.flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 间距 */
+.p-2 {
+  padding: 16rpx;
+}
+
+.p-4 {
+  padding: 32rpx;
+}
+
+.p-6 {
+  padding: 48rpx;
+}
+
+.p-8 {
+  padding: 64rpx;
+}
+
+.px-2 {
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+}
+
+.px-4 {
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+
+.py-0-5 {
+  padding-top: 4rpx;
+  padding-bottom: 4rpx;
+}
+
+.py-1 {
+  padding-top: 8rpx;
+  padding-bottom: 8rpx;
+}
+
+.py-2 {
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+}
+
+.pt-4 {
+  padding-top: 32rpx;
+}
+
+.m-1 {
+  margin: 8rpx;
+}
+
+.mx-4 {
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+.my-2 {
+  margin-top: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.mb-1 {
+  margin-bottom: 8rpx;
+}
+
+.mb-2 {
+  margin-bottom: 16rpx;
+}
+
+.mb-4 {
+  margin-bottom: 32rpx;
+}
+
+.mb-6 {
+  margin-bottom: 48rpx;
+}
+
+.mb-16 {
+  margin-bottom: 128rpx;
+}
+
+.mt-1 {
+  margin-top: 8rpx;
+}
+
+.mt-2 {
+  margin-top: 16rpx;
+}
+
+.mt-4 {
+  margin-top: 32rpx;
+}
+
+.mr-1 {
+  margin-right: 8rpx;
+}
+
+.mr-2 {
+  margin-right: 16rpx;
+}
+
+.mr-4 {
+  margin-right: 32rpx;
+}
+
+.ml-1 {
+  margin-left: 8rpx;
+}
+
+/* 尺寸 */
+.w-5 {
+  width: 40rpx;
+}
+
+.w-6 {
+  width: 48rpx;
+}
+
+.w-8 {
+  width: 64rpx;
+}
+
+.w-10 {
+  width: 80rpx;
+}
+
+.w-12 {
+  width: 96rpx;
+}
+
+.w-16 {
+  width: 128rpx;
+}
+
+.w-20 {
+  width: 160rpx;
+}
+
+.w-48 {
+  width: 384rpx;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-5 {
+  height: 40rpx;
+}
+
+.h-8 {
+  height: 64rpx;
+}
+
+.h-10 {
+  height: 80rpx;
+}
+
+.h-12 {
+  height: 96rpx;
+}
+
+.h-16 {
+  height: 128rpx;
+}
+
+.h-20 {
+  height: 160rpx;
+}
+
+/* 字体 */
+.text-xs {
+  font-size: 24rpx;
+}
+
+.text-sm {
+  font-size: 26rpx;
+}
+
+.text-lg {
+  font-size: 32rpx;
+}
+
+.text-xl {
+  font-size: 36rpx;
+}
+
+.text-2xl {
+  font-size: 48rpx;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* 边框和圆角 */
+.border {
+  border-width: 2rpx;
+  border-style: solid;
+}
+
+.border-t {
+  border-top-width: 2rpx;
+  border-top-style: solid;
+}
+
+.rounded-lg {
+  border-radius: 16rpx;
+}
+
+.rounded-xl {
+  border-radius: 24rpx;
+}
+
+.rounded-full {
+  border-radius: 9999rpx;
+}
+
+/* 阴影 */
+.shadow-lg {
+  box-shadow: 0 10rpx 15rpx -3rpx rgba(0, 0, 0, 0.1), 0 4rpx 6rpx -2rpx rgba(0, 0, 0, 0.05);
+}
+
+/* Z-index */
+.z-10 {
+  z-index: 10;
+}
+
+/* 按钮样式 */
+.btn {
+  /* display: inline-flex; */
+  align-items: center;
+  justify-content: center;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 20rpx 32rpx;
+  transition: all 0.2s;
+  border: none;
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  background-color: #2563eb;
+}
+
+.btn-blue {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.btn-blue:active {
+  background-color: #2563eb;
+}
+
+.btn-rounded {
+  border-radius: 9999rpx;
+}
+
+.btn-sm {
+  font-size: 24rpx;
+  padding: 12rpx 24rpx;
+  height: auto;
+  line-height: 1.5;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #3b82f6;
+  color: #3b82f6;
+}
+
+.btn-outline:active {
+  background-color: #eff6ff;
+}
+
+/* 标签样式 - 重要！确保这部分样式正确 */
+.tag {
+  display: inline-block;
+  padding: 16rpx 32rpx;
+  border-radius: 9999rpx;
+  font-size: 28rpx;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  margin: 8rpx;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.tag-selected {
+  background-color: #3b82f6 !important;
+  color: #ffffff !important;
+}
+
+/* 记录类型卡片 */
+.record-type-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-sizing: border-box;
-} 
-
-button {
-  background: initial;
+  padding: 40rpx;
+  border-radius: 16rpx;
+  background-color: #f9fafb;
+  transition: all 0.2s;
 }
 
-button:focus{
-  outline: 0;
+.record-type-card:active {
+  background-color: #f3f4f6;
+  transform: scale(0.98);
 }
 
-button::after{
-  border: none;
+/* 滑块区域 */
+.slider-area {
+  padding: 20rpx 0;
 }
 
-
-page {
-  background: #f6f6f6;
+/* 情绪标签 */
+.emotion-labels {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  padding: 0 10rpx;
+}
+
+.emotion-label {
+  font-size: 24rpx;
+  color: #6b7280;
+  text-align: center;
+  width: 20%;
+}
+
+/* 转换动画 */
+.transform {
+  transition: transform 0.2s;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* 悬停效果 */
+.hover-bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+/* 情绪图标颜色 */
+.bg-purple-300 {
+  background-color: #d8b4fe;
+}
+
+.bg-purple-500 {
+  background-color: #a855f7;
+}
+
+.bg-indigo-300 {
+  background-color: #a5b4fc;
+}
+
+.bg-indigo-500 {
+  background-color: #6366f1;
+}
+
+.bg-sky-200 {
+  background-color: #bae6fd;
+}
+
+.bg-sky-400 {
+  background-color: #38bdf8;
+}
+
+.bg-yellow-200 {
+  background-color: #fef08a;
+}
+
+.bg-yellow-400 {
+  background-color: #facc15;
+}
+
+.bg-amber-200 {
+  background-color: #fde68a;
+}
+
+.bg-amber-400 {
+  background-color: #f59e0b;
+}
+
+/* 滑块容器 */
+.slider-container {
+  position: relative;
+  width: 100%;
+  height: 80rpx;
+  margin: 40rpx 0;
+}
+
+/* 滑块样式 */
+slider {
+  width: 100%;
+}
+
+/* 数字徽标 */
+.mark {
+  color: #1afa29;
+  position: absolute;
+  top: -15rpx; /* 调整位置 */
+  right: -10rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+  padding: 0 8rpx;
+  background: #ff4d4f; /* 红色背景 */
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 36rpx;
+  text-align: center;
+  border-radius: 18rpx;
+  border: 2rpx solid #fff; /* 白色边框 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+  transform: scale(0.9);
+  transition: all 0.3s ease;
 }

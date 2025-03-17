@@ -1,20 +1,17 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/emotion-type/emotion-type",
+    "pages/emotion-selector/emotion-selector",
+    "pages/emotion-details/emotion-details",
+    "pages/emotion-factors/emotion-factors"
   ],
   "window": {
-    "backgroundColor": "#F7E48F",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F7E48F",
-    "navigationBarTitleText": "AI心想视成",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "情绪记录",
     "navigationBarTextStyle": "black"
   },
-  "permission": {
-    "scope.writePhotosAlbum": {
-      "desc": "需要您的授权以保存图片到相册"
-    }
-  },
-  "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "lazyCodeLoading": "requiredComponents"
+  "sitemapLocation": "sitemap.json"
 }

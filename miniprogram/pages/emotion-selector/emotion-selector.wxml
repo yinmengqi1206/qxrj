@@ -1,0 +1,52 @@
+<!-- pages/emotion-selector/emotion-selector.wxml -->
+<view class="container bg-gray-100">
+    <view class="header p-4 flex items-center bg-white">
+        <view class="back-icon text-blue-500" bindtap="goBack">
+            <text class="cuIcon-back"></text>
+        </view>
+        <view class="title text-xl font-medium text-center flex-1">选择情绪状态</view>
+        <view class="w-6"></view>
+    </view>
+    <view class="p-4">
+        <view class="text-xl font-medium mb-4">
+            {{recordType === 'daily' ? '您今天的整体情绪状态是？' : '您当下的情绪状态是？'}}
+        </view>
+        <view class="bg-white rounded-xl p-6">
+            <!-- 情绪图标 -->
+            <view class="flex justify-center mb-6">
+                <view wx:if="{{selectedEmotion.icon === 'flower-purple'}}" class="w-20 h-20 bg-purple-300 rounded-full flex items-center justify-center">
+                    <view class="w-12 h-12 bg-purple-500 rounded-full"></view>
+                </view>
+                <view wx:elif="{{selectedEmotion.icon === 'flower-indigo'}}" class="w-20 h-20 bg-indigo-300 rounded-full flex items-center justify-center">
+                    <view class="w-12 h-12 bg-indigo-500 rounded-full"></view>
+                </view>
+                <view wx:elif="{{selectedEmotion.icon === 'circle'}}" class="w-20 h-20 bg-sky-200 rounded-full flex items-center justify-center">
+                    <view class="w-12 h-12 bg-sky-400 rounded-full"></view>
+                </view>
+                <view wx:elif="{{selectedEmotion.icon === 'flower-yellow'}}" class="w-20 h-20 bg-yellow-200 rounded-full flex items-center justify-center">
+                    <view class="w-12 h-12 bg-yellow-400 rounded-full"></view>
+                </view>
+                <view wx:elif="{{selectedEmotion.icon === 'flower-gold'}}" class="w-20 h-20 bg-amber-200 rounded-full flex items-center justify-center">
+                    <view class="w-12 h-12 bg-amber-400 rounded-full"></view>
+                </view>
+            </view>
+            <!-- 情绪名称 -->
+            <view class="text-center text-xl font-medium mb-4">{{selectedEmotion.name}}</view>
+            <!-- 滑块区域 -->
+            <view class="slider-area" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd">
+                <slider min="0" max="100" value="{{sliderValue}}" activeColor="#3b82f6" backgroundColor="#e5e7eb" block-size="28" bindchange="sliderChange" />
+                <!-- 情绪标签 -->
+                <view class="emotion-labels">
+                    <view class="emotion-label">非常不愉快</view>
+                    <view class="emotion-label">不愉快</view>
+                    <view class="emotion-label">不悲不喜</view>
+                    <view class="emotion-label">愉快</view>
+                    <view class="emotion-label">非常愉快</view>
+                </view>
+            </view>
+        </view>
+        <view class="fixed-bottom p-4 bg-white">
+            <button bindtap="goNext" class="btn btn-primary w-full">下一步</button>
+        </view>
+    </view>
+</view>
