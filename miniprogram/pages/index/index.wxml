@@ -1,16 +1,18 @@
 <!-- pages/index/index.wxml -->
 <view class="container bg-gray-100">
-    <view class="header p-4 flex items-center bg-white">
+    <!-- <view class="header p-4 flex items-center bg-white">
         <view class="back-icon text-blue-500">
             <text class="cuIcon-back"></text>
         </view>
         <view class="title text-xl font-medium text-center flex-1">心理状态</view>
         <view class="w-6"></view>
-    </view>
+    </view> -->
     <view class="p-4 flex items-center justify-between">
+        <image class="calendar" src="../../images/icons/calendar.png" />
         <view class="text-xl font-medium">{{formattedDate}}</view>
         <button bindtap="startRecording" class="btn btn-blue btn-rounded">记录</button>
     </view>
+    <calendar id="calendar" bindclick="calendarBindclick" />
     <view class="mx-4 p-6 bg-white rounded-xl">
         <view class="text-center text-gray-500 mb-6">每日心情</view>
         <!-- 有当日情绪时显示 -->

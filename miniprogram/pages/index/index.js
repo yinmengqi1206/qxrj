@@ -2,6 +2,11 @@
 const emotionData = require('../../utils/emotion-data.js')
 const util = require('../../utils/util.js')
 const cloud = require('../../utils/cloud.js')
+const { WxCalendar } = require('@lspriv/wx-calendar/lib');
+const { LunarPlugin } = require('@lspriv/wc-plugin-lunar');
+const tool = require('../../utils/tool.js')
+// 使用农历插件
+WxCalendar.use(LunarPlugin);
 
 Page({
   data: {
@@ -17,6 +22,9 @@ Page({
     // cloud.call("getOpenId","你好").then(response => {
     //   console.log('最终结果:', response);
     // });
+  },
+  calendarBindclick(detail){
+    console.log('click', detail.detail.checked);
   },
   
   onShow: function() {
