@@ -9,7 +9,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "AI心理小助手",
+    "navigationBarTitleText": "AI情绪小助手",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
