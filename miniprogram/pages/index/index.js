@@ -12,11 +12,12 @@ Page({
   data: {
     formattedDate: '',
     dailyEmotion: null,
-    momentaryEmotions: []
+    momentaryEmotions: [],
+    showCalendar: false,
   },
 
   onLoad: function() {
-    this.updateData()
+    this.updateData(new Date(),true)
     // console.log("dailyEmotion", this.data.dailyEmotion)
     // console.log("momentaryEmotions", this.data.momentaryEmotions)
     // cloud.call("getOpenId","你好").then(response => {
@@ -24,39 +25,54 @@ Page({
     // });
   },
   calendarBindclick(detail){
-    console.log('click', detail.detail.checked);
+    const calendarDate  = detail.detail.checked;
+    //year: 2025,month: 3,day: 1,today: false
+    const date = new Date(calendarDate.year, calendarDate.month-1, calendarDate.day)
+    this.updateData(date,calendarDate.today)
+    this.hideCalendar(); // 点击日历事件后隐藏浮层
   },
   
-  onShow: function() {
-    this.updateData()
-  },
-  
-  updateData: function() {
-    // 获取今天日期
-    const today = new Date()
-    const formattedDate = `${today.getMonth() + 1}月${today.getDate()}日 今天`
-    
+  updateData: function(date = new Date(), today = false) {
+    let formattedDate = `${date.getMonth() + 1}月${date.getDate()}日`;
+    if (today) {
+      formattedDate = formattedDate + "(今天)";
+    }
+
     // 获取当日情绪
-    const dailyEmotion = emotionData.getDailyEmotion()
-    
+    const dailyEmotion = emotionData.getDailyEmotion(date) || null; // 确保 undefined 被处理为 null
+
     // 获取瞬时情绪列表
-    const momentaryEmotions = emotionData.getMomentaryEmotions().map(emotion => {
+    const momentaryEmotions = emotionData.getMomentaryEmotions(date).map(emotion => {
       return {
         ...emotion,
         formattedTime: util.formatTime(new Date(emotion.timestamp))
-      }
-    })
-    
+      };
+    });
+
     this.setData({
       formattedDate,
-      dailyEmotion,
+      dailyEmotion, // 显式设置 dailyEmotion
       momentaryEmotions
-    })
+    });
   },
   
   startRecording: function() {
     wx.navigateTo({
       url: '/pages/emotion-type/emotion-type'
     })
+  },
+
+  toggleCalendar() {
+    this.setData({
+      showCalendar: !this.data.showCalendar,
+    });
+  },
+  hideCalendar() {
+    this.setData({
+      showCalendar: false,
+    });
+  },
+  preventTap() {
+    // 阻止事件冒泡，防止点击日历内容关闭浮层
   },
 })

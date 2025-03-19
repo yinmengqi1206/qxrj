@@ -8,11 +8,13 @@
         <view class="w-6"></view>
     </view> -->
     <view class="p-4 flex items-center justify-between">
-        <image class="calendar" src="../../images/icons/calendar.png" />
+        <image class="calendar" src="../../images/icons/calendar.png" bindtap="toggleCalendar" />
         <view class="text-xl font-medium">{{formattedDate}}</view>
         <button bindtap="startRecording" class="btn btn-blue btn-rounded">记录</button>
     </view>
-    <calendar id="calendar" bindclick="calendarBindclick" />
+    <view wx:if="{{showCalendar}}" class="calendar-overlay" bindtap="hideCalendar">
+        <calendar view="month" id="calendar" bindclick="calendarBindclick" />
+    </view>
     <view class="mx-4 p-6 bg-white rounded-xl">
         <view class="text-center text-gray-500 mb-6">每日心情</view>
         <!-- 有当日情绪时显示 -->

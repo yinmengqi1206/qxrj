@@ -45,25 +45,29 @@ function addEmotion(emotion) {
   return newEmotion
 }
 
-// 获取今日情绪记录
-function getTodayEmotions() {
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const todayTimestamp = today.getTime()
+// 获取今日情绪记录（支持按指定日期过滤）
+function getTodayEmotions(date = new Date()) {
+  const targetDate = new Date(date)
+  targetDate.setHours(0, 0, 0, 0)
+  const targetTimestamp = targetDate.getTime()
+
+  const nextDay = new Date(targetDate)
+  nextDay.setDate(targetDate.getDate() + 1)
+  const nextDayTimestamp = nextDay.getTime()
 
   const emotions = getEmotions()
-  return emotions.filter(emotion => emotion.timestamp >= todayTimestamp)
+  return emotions.filter(emotion => emotion.timestamp >= targetTimestamp && emotion.timestamp < nextDayTimestamp)
 }
 
 // 获取当日整体情绪
-function getDailyEmotion() {
-  const todayEmotions = getTodayEmotions()
+function getDailyEmotion(date = new Date()) {
+  const todayEmotions = getTodayEmotions(date)
   return todayEmotions.find(emotion => emotion.recordType === 'daily')
 }
 
 // 获取瞬时情绪列表
-function getMomentaryEmotions() {
-  const todayEmotions = getTodayEmotions()
+function getMomentaryEmotions(date = new Date()) {
+  const todayEmotions = getTodayEmotions(date)
   return todayEmotions.filter(emotion => emotion.recordType === 'current')
 }
 
