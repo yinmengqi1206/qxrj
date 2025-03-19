@@ -18,6 +18,8 @@ Page({
 
   onLoad: function() {
     this.updateData(new Date(),true)
+    const stats = emotionData.getEmotionStats()
+    console.log('Emotion stats:', stats);
     // console.log("dailyEmotion", this.data.dailyEmotion)
     // console.log("momentaryEmotions", this.data.momentaryEmotions)
     // cloud.call("getOpenId","你好").then(response => {
