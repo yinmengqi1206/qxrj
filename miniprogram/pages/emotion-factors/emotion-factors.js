@@ -63,7 +63,7 @@ Page({
       type: selectedEmotion.type,
       name: selectedEmotion.name,
       color: selectedEmotion.color,
-      colorM: selectedEmotion.colorM,
+      colorC: selectedEmotion.colorC,
       icon: selectedEmotion.icon,
       value: selectedEmotion.value,
       details: selectedDetails,

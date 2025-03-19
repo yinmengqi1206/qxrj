@@ -15,7 +15,7 @@
             <!-- 情绪图标 -->
             <view class="flex justify-center mb-6">
                 <view style="background-color:{{selectedEmotion.color}}" class="w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                    <view style="background-color:{{selectedEmotion.colorM}}" class="w-12 h-12 rounded-full"></view>
+                    <view style="background-color:{{selectedEmotion.colorC}}" class="w-12 h-12 rounded-full"></view>
                 </view>
             </view>
             <!-- 情绪名称 -->

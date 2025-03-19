@@ -6,7 +6,7 @@ Page({
       type: 'neutral',
       name: '不悲不喜',
       color: '#bae6fd',  // 标准浅天蓝
-      colorM: '#38bdf8', // 标准深天蓝
+      colorC: '#38bdf8', // 标准深天蓝
       icon: 'circle',
       value: 50
     },
@@ -33,7 +33,7 @@ Page({
         type: 'veryUnhappy',
         name: '非常不愉快',
         color: '#e0e7ff',  // 最冷色-淡紫
-        colorM: '#6366f1', // 深靛蓝
+        colorC: '#6366f1', // 深靛蓝
         icon: 'flower-purple',
         value
       }
@@ -42,7 +42,7 @@ Page({
         type: 'unhappy',
         name: '不愉快',
         color: '#c7d2fe',  // 浅蓝紫
-        colorM: '#818cf8', // 中等蓝紫
+        colorC: '#818cf8', // 中等蓝紫
         icon: 'flower-indigo',
         value
       }
@@ -51,7 +51,7 @@ Page({
         type: 'slightlyUnhappy',
         name: '有点不愉快',
         color: '#bfdbfe',  // 冷调浅蓝
-        colorM: '#60a5fa', // 深天蓝
+        colorC: '#60a5fa', // 深天蓝
         icon: 'flower-blue',
         value
       }
@@ -60,7 +60,7 @@ Page({
         type: 'neutral',
         name: '不悲不喜',
         color: '#bae6fd',  // 标准浅天蓝
-        colorM: '#38bdf8', // 标准深天蓝
+        colorC: '#38bdf8', // 标准深天蓝
         icon: 'circle',
         value
       }
@@ -69,7 +69,7 @@ Page({
         type: 'slightlyHappy',
         name: '有点愉快',
         color: '#a7f3d0',  // 淡薄荷绿
-        colorM: '#34d399', // 深薄荷绿
+        colorC: '#34d399', // 深薄荷绿
         icon: 'flower-green',
         value
       }
@@ -78,7 +78,7 @@ Page({
         type: 'happy',
         name: '愉快',
         color: '#fef08a',  // 浅琥珀黄
-        colorM: '#facc15', // 深琥珀黄
+        colorC: '#facc15', // 深琥珀黄
         icon: 'flower-yellow',
         value
       }
@@ -87,7 +87,7 @@ Page({
         type: 'veryHappy',
         name: '非常愉快',
         color: '#fed7aa',  // 浅橙
-        colorM: '#fb923c', // 深橙
+        colorC: '#fb923c', // 深橙
         icon: 'flower-gold',
         value
       }
