@@ -14,17 +14,21 @@ Page({
     dailyEmotion: null,
     momentaryEmotions: [],
     showCalendar: false,
+    today: false,
   },
 
   onLoad: function() {
     this.updateData(new Date(),true)
-    const stats = emotionData.getEmotionStats()
-    console.log('Emotion stats:', stats);
+    // const stats = emotionData.getEmotionStats()
+    // console.log('Emotion stats:', stats);
     // console.log("dailyEmotion", this.data.dailyEmotion)
     // console.log("momentaryEmotions", this.data.momentaryEmotions)
     // cloud.call("getOpenId","你好").then(response => {
     //   console.log('最终结果:', response);
     // });
+  },
+  onShow: function() {
+    this.updateData(new Date(),true)
   },
   calendarBindclick(detail){
     const calendarDate  = detail.detail.checked;
@@ -36,6 +40,9 @@ Page({
   
   updateData: function(date = new Date(), today = false) {
     let formattedDate = `${date.getMonth() + 1}月${date.getDate()}日`;
+    this.setData({
+      today
+    });
     if (today) {
       formattedDate = formattedDate + "(今天)";
     }
