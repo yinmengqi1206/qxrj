@@ -158,3 +158,13 @@
   .flower-gold {
     background: radial-gradient(circle, transparent 30%, #fef3c7 30%);
   }
+
+  .emotion-selector {
+    color: #7c3aed;
+    color: #6366f1;
+    color: #4f46e5;
+    color: #0ea5e9;
+    color: #22c55e;
+    color: #eab308;
+    color: #f59e0b;
+  }

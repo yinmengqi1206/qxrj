@@ -427,14 +427,18 @@ page {
   display: flex;
   justify-content: space-between;
   margin-top: 20rpx;
-  padding: 0 10rpx;
 }
 
 .emotion-label {
+  writing-mode: vertical-rl;  /* 从右向左竖排 */
+  text-orientation: upright;  /* 保持字符直立 */
+  letter-spacing: 0.5em;      /* 字间距调整 */
   font-size: 24rpx;
   color: #6b7280;
-  text-align: center;
-  width: 20%;
+  width: 15%;
+  /* 新增代码 */
+  display: flex;
+  align-items: center;    /* 垂直居中 */
 }
 
 /* 转换动画 */
@@ -451,37 +455,13 @@ page {
   background-color: #f3f4f6;
 }
 
-/* 情绪图标颜色 */
-.bg-purple-300 {
-  background-color: #d8b4fe;
-}
-
-.bg-purple-500 {
-  background-color: #a855f7;
-}
-
-.bg-indigo-300 {
-  background-color: #a5b4fc;
-}
-
-.bg-indigo-500 {
-  background-color: #6366f1;
-}
-
+/* 情绪类型图标颜色 */
 .bg-sky-200 {
   background-color: #bae6fd;
 }
 
 .bg-sky-400 {
   background-color: #38bdf8;
-}
-
-.bg-yellow-200 {
-  background-color: #fef08a;
-}
-
-.bg-yellow-400 {
-  background-color: #facc15;
 }
 
 .bg-amber-200 {

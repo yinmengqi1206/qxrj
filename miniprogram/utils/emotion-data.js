@@ -76,7 +76,9 @@ function getEmotionStats() {
   const stats = {
     veryHappy: 0,
     happy: 0,
+    slightlyHappy: 0,
     neutral: 0,
+    slightlyUnhappy: 0,
     unhappy: 0,
     veryUnhappy: 0
   }
@@ -87,8 +89,12 @@ function getEmotionStats() {
       stats.veryHappy++
     } else if (emotion.type === 'happy') {
       stats.happy++
+    }else if (emotion.type === 'slightlyHappy') {
+      stats.slightlyHappy++
     } else if (emotion.type === 'neutral') {
       stats.neutral++
+    } else if (emotion.type === 'slightlyUnhappy') {
+      stats.slightlyUnhappy++
     } else if (emotion.type === 'unhappy') {
       stats.unhappy++
     } else if (emotion.type === 'veryUnhappy') {
