@@ -1,4 +1,4 @@
-# 基础通用忽略项
+#基础通用忽略项
 /miniprogram/node_modules/
 /dist/
 /build/
@@ -12,21 +12,28 @@ Thumbs.db
 .env.local
 npm-debug.log*
 
-# IDE配置
+#IDE配置
 /.idea
 /.vscode
 /.project
 /.settings
 
-# 微信小程序特有忽略项
-/project.private.config.json  # 包含敏感信息（如appid）
-/unpackage/                   # 编译生成的包目录（如果存在）
-/miniprogram/miniprogram_npm/             # 小程序npm构建目录
-/cloudfunctions/node_modules  # 云函数本地依赖
-/.cloudfunctions              # 云函数调试临时文件
+#微信小程序特有忽略项
+#包含敏感信息（如appid）
+/project.private.config.json
+#编译生成的包目录（如果存在）
+/unpackage/
+/miniprogram/miniprogram_npm/
+#云函数本地依赖
+/cloudfunctions/node_modules
+#云函数调试临时文件
+/.cloudfunctions
 
-# 可选忽略项（根据项目实际情况调整）
-/images/temp/                 # 临时图片目录
-/screenshots/                 # 测试截图
-/test/                        # 本地测试文件
+#可选忽略项（根据项目实际情况调整）
+#临时图片目录
+/images/temp/
+#测试截图
+/screenshots/
+#本地测试文件
+/test/
 **/.DS_Store
