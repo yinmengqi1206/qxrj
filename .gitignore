@@ -1,5 +1,5 @@
 # 基础通用忽略项
-/node_modules/
+/miniprogram/node_modules/
 /dist/
 /build/
 *.log
@@ -21,7 +21,7 @@ npm-debug.log*
 # 微信小程序特有忽略项
 /project.private.config.json  # 包含敏感信息（如appid）
 /unpackage/                   # 编译生成的包目录（如果存在）
-/miniprogram_npm/             # 小程序npm构建目录
+/miniprogram/miniprogram_npm/             # 小程序npm构建目录
 /cloudfunctions/node_modules  # 云函数本地依赖
 /.cloudfunctions              # 云函数调试临时文件
 
