@@ -62,9 +62,6 @@ Page({
     const emotion = {
       type: selectedEmotion.type,
       name: selectedEmotion.name,
-      color: selectedEmotion.color,
-      colorC: selectedEmotion.colorC,
-      icon: selectedEmotion.icon,
       value: selectedEmotion.value,
       details: selectedDetails,
       factors: selectedFactors,

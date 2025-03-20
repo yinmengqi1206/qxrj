@@ -5,9 +5,6 @@ Page({
     selectedEmotion: {
       type: 'neutral',
       name: '不悲不喜',
-      color: '#bae6fd',  // 标准浅天蓝
-      colorC: '#38bdf8', // 标准深天蓝
-      icon: 'circle',
       value: 50
     },
     recordType: ''
@@ -32,63 +29,42 @@ Page({
       emotion = {
         type: 'veryUnhappy',
         name: '非常不愉快',
-        color: '#e0e7ff',  // 最冷色-淡紫
-        colorC: '#6366f1', // 深靛蓝
-        icon: 'flower-purple',
         value
       }
     } else if (value < 30) {
       emotion = {
         type: 'unhappy',
         name: '不愉快',
-        color: '#c7d2fe',  // 浅蓝紫
-        colorC: '#818cf8', // 中等蓝紫
-        icon: 'flower-indigo',
         value
       }
     } else if (value < 45) {
       emotion = {
         type: 'slightlyUnhappy',
         name: '有点不愉快',
-        color: '#bfdbfe',  // 冷调浅蓝
-        colorC: '#60a5fa', // 深天蓝
-        icon: 'flower-blue',
         value
       }
     } else if (value < 60) {
       emotion = {
         type: 'neutral',
         name: '不悲不喜',
-        color: '#bae6fd',  // 标准浅天蓝
-        colorC: '#38bdf8', // 标准深天蓝
-        icon: 'circle',
         value
       }
     } else if (value < 75) {
       emotion = {
         type: 'slightlyHappy',
         name: '有点愉快',
-        color: '#a7f3d0',  // 淡薄荷绿
-        colorC: '#34d399', // 深薄荷绿
-        icon: 'flower-green',
         value
       }
     } else if (value < 90) {
       emotion = {
         type: 'happy',
         name: '愉快',
-        color: '#fef08a',  // 浅琥珀黄
-        colorC: '#facc15', // 深琥珀黄
-        icon: 'flower-yellow',
         value
       }
     } else {
       emotion = {
         type: 'veryHappy',
         name: '非常愉快',
-        color: '#fed7aa',  // 浅橙
-        colorC: '#fb923c', // 深橙
-        icon: 'flower-gold',
         value
       }
     }
