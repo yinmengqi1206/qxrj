@@ -15,7 +15,7 @@ App({
   },
   
   globalData: {
-    timestamp: 0,
+    timestamp: new Date().getTime(),
     selectedEmotion: null,
     selectedDetails: [],
     recordType: ''
