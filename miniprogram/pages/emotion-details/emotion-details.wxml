@@ -11,20 +11,10 @@
     <view class="p-4">
         <view class="mb-4 flex items-center">
             <!-- 情绪图标 -->
-            <view wx:if="{{selectedEmotion.icon === 'flower-purple'}}" class="w-12 h-12 bg-purple-300 rounded-full flex items-center justify-center mr-4">
-                <view class="w-8 h-8 bg-purple-500 rounded-full"></view>
-            </view>
-            <view wx:elif="{{selectedEmotion.icon === 'flower-indigo'}}" class="w-12 h-12 bg-indigo-300 rounded-full flex items-center justify-center mr-4">
-                <view class="w-8 h-8 bg-indigo-500 rounded-full"></view>
-            </view>
-            <view wx:elif="{{selectedEmotion.icon === 'circle'}}" class="w-12 h-12 bg-sky-200 rounded-full flex items-center justify-center mr-4">
-                <view class="w-8 h-8 bg-sky-400 rounded-full"></view>
-            </view>
-            <view wx:elif="{{selectedEmotion.icon === 'flower-yellow'}}" class="w-12 h-12 bg-yellow-200 rounded-full flex items-center justify-center mr-4">
-                <view class="w-8 h-8 bg-yellow-400 rounded-full"></view>
-            </view>
-            <view wx:elif="{{selectedEmotion.icon === 'flower-gold'}}" class="w-12 h-12 bg-amber-200 rounded-full flex items-center justify-center mr-4">
-                <view class="w-8 h-8 bg-amber-400 rounded-full"></view>
+            <view class="flex justify-center mb-6">
+                <view style="background-color:{{selectedEmotion.color}}" class="w-12 h-12 rounded-full flex items-center justify-center mr-4">
+                    <view style="background-color:{{selectedEmotion.colorC}}" class="w-8 h-8 rounded-full"></view>
+                </view>
             </view>
             <view>
                 <view class="font-medium">{{selectedEmotion.name}}</view>
