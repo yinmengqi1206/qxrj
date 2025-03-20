@@ -32,7 +32,7 @@ function addEmotion(emotion) {
     const nextDayTimestamp = nextDay.getTime()
     
     // 过滤掉今天的当日情绪记录
-    emotions = emotions.filter(e => !(e.recordType === 'daily' && e.timestamp >= todayTimestamp && emotion.timestamp < nextDayTimestamp))
+    emotions = emotions.filter(e => !(e.recordType === 'daily' && e.timestamp >= todayTimestamp && e.timestamp < nextDayTimestamp))
   }
 
   emotions = [newEmotion, ...emotions]
