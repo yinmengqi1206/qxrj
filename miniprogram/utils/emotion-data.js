@@ -24,7 +24,7 @@ function addEmotion(emotion) {
 
   // 如果是当日情绪，则替换之前的当日情绪记录
   if (emotion.recordType === 'daily') {
-    const today = new Date()
+    const today = new Date(getApp().globalData.timestamp)
     today.setHours(0, 0, 0, 0)
     const todayTimestamp = today.getTime()
     
