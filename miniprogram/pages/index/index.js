@@ -14,12 +14,11 @@ Page({
     formattedDate: '',
     dailyEmotion: null,
     momentaryEmotions: [],
-    showCalendar: false,
-    today: false,
+    showCalendar: false
   },
 
   onLoad: function() {
-    this.updateData(new Date(getApp().globalData.timestamp),true)
+    this.updateData(new Date(getApp().globalData.timestamp || Date.now()),true)
     // const stats = emotionData.getEmotionStats()
     // console.log('Emotion stats:', stats);
     // console.log("dailyEmotion", this.data.dailyEmotion)
@@ -32,22 +31,21 @@ Page({
     // });
   },
   onShow: function() {
-    this.updateData(new Date(getApp().globalData.timestamp),true)
+    this.updateData(new Date(getApp().globalData.timestamp))
   },
   calendarBindclick(detail){
     const calendarDate  = detail.detail.checked;
     //year: 2025,month: 3,day: 1,today: false
     const date = new Date(calendarDate.year, calendarDate.month-1, calendarDate.day)
-    this.updateData(date,calendarDate.today)
+    this.updateData(date)
     this.hideCalendar(); // 点击日历事件后隐藏浮层
   },
   
-  updateData: function(date = new Date(), today = false) {
+  updateData: function(date = new Date()) {
     getApp().globalData.timestamp = date.getTime();
     let formattedDate = `${date.getMonth() + 1}月${date.getDate()}日`;
-    this.setData({
-      today
-    });
+    //判断是不是今天
+    const today = util.isToday(date);
     if (today) {
       formattedDate = formattedDate + "(今天)";
     }

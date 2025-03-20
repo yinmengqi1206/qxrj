@@ -14,7 +14,13 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+function isToday(date) {
+  const now = new Date();
+  return date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+}
+
 module.exports = {
   formatTime,
-  formatNumber
+  formatNumber,
+  isToday
 }
