@@ -43,6 +43,8 @@ Page({
   },
   
   updateData: function(date = new Date(), today = false) {
+    getApp().globalData.timestamp = date.getTime();
+    console.log("date", getApp().globalData.timestamp)
     let formattedDate = `${date.getMonth() + 1}月${date.getDate()}日`;
     this.setData({
       today
@@ -53,6 +55,7 @@ Page({
 
     // 获取当日情绪
     const dailyEmotion = emotionData.getDailyEmotion(date) || null; // 确保 undefined 被处理为 null
+    console.log("dailyEmotion", dailyEmotion)
 
     // 获取瞬时情绪列表
     const momentaryEmotions = emotionData.getMomentaryEmotions(date).map(emotion => {

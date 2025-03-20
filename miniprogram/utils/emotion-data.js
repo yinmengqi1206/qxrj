@@ -17,9 +17,7 @@ function getEmotions() {
 // 添加新的情绪记录
 function addEmotion(emotion) {
   const newEmotion = {
-    ...emotion,
-    id: Date.now().toString(),
-    timestamp: Date.now()
+    ...emotion
   }
 
   let emotions = getEmotions()

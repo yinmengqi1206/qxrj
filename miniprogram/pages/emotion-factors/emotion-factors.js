@@ -65,7 +65,8 @@ Page({
       details: selectedDetails,
       factors: selectedFactors,
       customContext: customContext,
-      recordType: recordType
+      recordType: recordType,
+      timestamp: getApp().globalData.timestamp
     }
     
     // 保存情绪记录
