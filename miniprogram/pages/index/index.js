@@ -14,9 +14,22 @@ Page({
     formattedDate: '',
     dailyEmotion: null,
     momentaryEmotions: [],
-    showCalendar: false
+    showCalendar: false,
+    marks:[
+      {
+        year: 2025,
+        month: 3,
+        day: 10,
+        type: "schedule"
+      }
+    ]
   },
-
+  handleLoad() {
+    const calendar = this.selectComponent('#calendar');
+    //calendar.getMarks = marks;
+    // 如果你使用了其他插件，比如 WxCalendar.use(AnyPlugin)，则可以
+    // const calendar = ... as CalendarExport<[typeof AnyPlugin]>;
+  },
   onLoad: function() {
     this.updateData(new Date(getApp().globalData.timestamp || Date.now()),true)
     // const stats = emotionData.getEmotionStats()
@@ -42,6 +55,40 @@ Page({
   },
   
   updateData: function(date = new Date()) {
+    // 用于去重的 Set
+    const uniqueDates = new Set();
+    //初始化日历标记
+    const marks =  emotionData.getEmotions().map((item) => {
+      // 将时间戳转换为日期对象
+      const date = new Date(item.timestamp);
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // 月份从 0 开始，需要 +1
+      const day = date.getDate();
+  
+      // 生成唯一键（年月日）
+      const dateKey = `${year}-${month}-${day}`;
+  
+      // 如果日期已经存在，跳过
+      if (uniqueDates.has(dateKey)) {
+        return null;
+      }
+  
+      // 添加到 Set 中
+      uniqueDates.add(dateKey);
+  
+      // 返回 marks 对象
+      return {
+        year,
+        month,
+        day,
+        type: "schedule", // 固定类型
+      };
+    })
+    .filter(Boolean); // 过滤掉 null 值
+    this.setData({
+      marks
+    })
+    //渲染页面数据
     getApp().globalData.timestamp = date.getTime();
     let formattedDate = `${date.getMonth() + 1}月${date.getDate()}日`;
     //判断是不是今天

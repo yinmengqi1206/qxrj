@@ -16,7 +16,7 @@
         <image class="index-icon" src="../../images/icons/emotion.png" bindtap="startRecording" />
     </view>
     <view wx:if="{{showCalendar}}" class="calendar-overlay" bindtap="hideCalendar">
-        <calendar view="month" id="calendar" bindclick="calendarBindclick" />
+        <calendar style="--wc-dot-color-light:rgb(231, 162, 24);--wc-dot-size:8px;--wc-dot-offset-y: 40px;" marks="{{marks}}" view="month" id="calendar" bindclick="calendarBindclick" bindload="handleLoad" />
     </view>
     <view class="mx-4 p-6 bg-white rounded-xl">
         <view class="text-center text-gray-500 mb-6">每日心情</view>
