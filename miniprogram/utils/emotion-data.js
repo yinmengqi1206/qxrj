@@ -24,12 +24,15 @@ function addEmotion(emotion) {
 
   // 如果是当日情绪，则替换之前的当日情绪记录
   if (emotion.recordType === 'daily') {
-    const today = new Date(getApp().globalData.timestamp)
+    const today = new Date(emotion.timestamp)
     today.setHours(0, 0, 0, 0)
     const todayTimestamp = today.getTime()
+    const nextDay = new Date(today)
+    nextDay.setDate(today.getDate() + 1)
+    const nextDayTimestamp = nextDay.getTime()
     
     // 过滤掉今天的当日情绪记录
-    emotions = emotions.filter(e => !(e.recordType === 'daily' && e.timestamp >= todayTimestamp))
+    emotions = emotions.filter(e => !(e.recordType === 'daily' && e.timestamp >= todayTimestamp && emotion.timestamp < nextDayTimestamp))
   }
 
   emotions = [newEmotion, ...emotions]
