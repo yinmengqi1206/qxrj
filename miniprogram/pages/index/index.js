@@ -2,6 +2,7 @@
 const emotionData = require('../../utils/emotion-data.js')
 const util = require('../../utils/util.js')
 const cloud = require('../../utils/cloud.js')
+const siliconflow = require('../../utils/siliconflow.js')
 const { WxCalendar } = require('@lspriv/wx-calendar/lib');
 const { LunarPlugin } = require('@lspriv/wc-plugin-lunar');
 const tool = require('../../utils/tool.js')
@@ -24,6 +25,9 @@ Page({
     // console.log("dailyEmotion", this.data.dailyEmotion)
     // console.log("momentaryEmotions", this.data.momentaryEmotions)
     // cloud.call("getOpenId","你好").then(response => {
+    //   console.log('最终结果:', response);
+    // });
+    // siliconflow.call("你好").then(response => {
     //   console.log('最终结果:', response);
     // });
   },

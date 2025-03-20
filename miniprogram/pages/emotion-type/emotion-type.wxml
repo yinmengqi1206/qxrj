@@ -11,15 +11,15 @@
         <view class="text-xl font-medium mb-4">您想记录什么类型的情绪？</view>
         <view class="bg-white rounded-xl p-6">
             <view class="record-type-card" bindtap="selectRecordType" data-type="daily">
-                <view class="w-16 h-16 bg-amber-200 rounded-full flex items-center justify-center mb-2">
-                    <view class="w-10 h-10 bg-amber-400 rounded-full"></view>
+                <view class="w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                    <image class="emotion-image" src="../../images/icons/current.png" />
                 </view>
                 <view class="text-lg font-medium">当日整体情绪</view>
                 <view class="text-gray-500">记录今天的整体心情状态</view>
             </view>
             <view class="record-type-card mt-4" bindtap="selectRecordType" data-type="current">
-                <view class="w-16 h-16 bg-sky-200 rounded-full flex items-center justify-center mb-2">
-                    <view class="w-10 h-10 bg-sky-400 rounded-full"></view>
+                <view class="w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                    <image class="emotion-image" src="../../images/icons/daily.png" />
                 </view>
                 <view class="text-lg font-medium">瞬时情绪</view>
                 <view class="text-gray-500">记录当下的情绪状态</view>

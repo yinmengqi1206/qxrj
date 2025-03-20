@@ -8,9 +8,12 @@
         <view class="w-6"></view>
     </view> -->
     <view class="p-4 flex items-center justify-between">
-        <image class="calendar" src="../../images/icons/calendar.png" bindtap="toggleCalendar" />
-        <view class="text-xl font-medium">{{formattedDate}}</view>
-        <view wx:if="{{today}}" bindtap="startRecording" class="btn btn-blue btn-rounded">记录</view>
+        <image class="index-icon" src="../../images/logo.png" />
+        <view class="flex items-center">
+            <image class="index-icon" src="../../images/icons/calendar.png" bindtap="toggleCalendar" />
+            <view class="text-xl font-medium">{{formattedDate}}</view>
+        </view>
+        <image class="index-icon" src="../../images/icons/emotion.png" bindtap="startRecording" />
     </view>
     <view wx:if="{{showCalendar}}" class="calendar-overlay" bindtap="hideCalendar">
         <calendar view="month" id="calendar" bindclick="calendarBindclick" />
@@ -20,9 +23,7 @@
         <!-- 有当日情绪时显示 -->
         <view wx:if="{{dailyEmotion}}" class="flex flex-col items-center mb-6">
             <!-- 情绪图标 -->
-            <view style="background-color:{{dailyEmotion.color}}" class="w-20 h-20 rounded-full flex items-center justify-center mb-4">
-                <view style="background-color:{{dailyEmotion.colorC}}" class="w-12 h-12 rounded-full"></view>
-            </view>
+            <image src="../../images/icons/{{dailyEmotion.type}}.png" class="w-20 h-20 rounded-full flex items-center justify-center mb-4" />
             <view class="text-2xl font-bold mb-1">{{dailyEmotion.name}}</view>
             <view wx:if="{{dailyEmotion.factors.length > 0}}" class="mt-2 flex flex-wrap justify-center">
                 <view wx:for="{{dailyEmotion.factors}}" wx:key="*this" class="text-sm text-gray-500 bg-gray-100 rounded-full px-2 py-1 m-1">
@@ -43,15 +44,15 @@
         <!-- 没有当日情绪时显示 -->
         <view wx:else class="flex flex-col items-center mb-6 p-8">
             <view class="text-gray-500 mb-4">暂无每日心情记录</view>
+            <image class="index-icon" src="../../images/icons/emotion.png" />
+            <view class="text-gray-500 mb-4">点击开始记录您的每日心情</view>
         </view>
         <view class="border-t border-gray-200 pt-4">
             <view class="text-gray-500 mb-4">瞬时情绪</view>
             <block wx:if="{{momentaryEmotions.length > 0}}">
                 <view wx:for="{{momentaryEmotions}}" wx:key="id" class="flex items-center mb-4">
                     <!-- 情绪图标 -->
-                    <view style="background-color:{{item.color}}" class="w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                        <view style="background-color:{{item.colorC}}" class="w-8 h-8 rounded-full"></view>
-                    </view>
+                    <image src="../../images/icons/{{item.type}}.png" class="w-12 h-12 rounded-full flex items-center justify-center mr-4" />
                     <view class="flex-1">
                         <view class="font-medium">{{item.name}}</view>
                         <view wx:if="{{item.factors.length > 0}}" class="flex flex-wrap">
@@ -74,7 +75,13 @@
                 </view>
             </block>
             <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
-                暂无瞬时情绪记录，点击"记录"按钮开始记录您的情绪
+                暂无瞬时情绪记录
+            </view>
+            <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
+                <image class="index-icon" src="../../images/icons/emotion.png" />
+            </view>
+            <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
+                点击开始记录您的情绪
             </view>
         </view>
     </view>

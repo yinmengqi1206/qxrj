@@ -106,15 +106,11 @@
   .h-64 {
     height: 512rpx;
   }
-  
-  .bg-blue-100 {
-    background-color: #dbeafe;
-  }
-  
-  .bg-blue-200 {
-    background-color: #bfdbfe;
-  }
-  
-  .bg-green-200 {
-    background-color: #a7f3d0;
+
+  .emotion-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 关键属性 */
+    object-position: center; /* 控制焦点区域 */
+    border-width: clamp(1px, 0.5vw, 3px); /* 根据视口动态调整 */
   }

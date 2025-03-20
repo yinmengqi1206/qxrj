@@ -11,10 +11,8 @@
     <view class="p-4">
         <view class="mb-4 flex items-center">
             <!-- 情绪图标 -->
-            <view class="flex justify-center mb-6">
-                <view style="background-color:{{selectedEmotion.color}}" class="w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                    <view style="background-color:{{selectedEmotion.colorC}}" class="w-8 h-8 rounded-full"></view>
-                </view>
+            <view class="flex justify-center">
+                <image wx:if="{{selectedEmotion.type}}" src="../../images/icons/{{selectedEmotion.type}}.png" class="w-12 h-12 rounded-full flex items-center justify-center mr-4" />
             </view>
             <view>
                 <view class="font-medium">{{selectedEmotion.name}}</view>
