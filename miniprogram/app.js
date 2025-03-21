@@ -18,6 +18,7 @@ Page = function(config) {
       };
     },
     onShareTimeline() {
+      const currentPage = getCurrentPages().pop();
       const promise = new Promise(resolve => {
         resolve({
           title: '我正在使用情绪日记小助手，一起来试试吧！'
