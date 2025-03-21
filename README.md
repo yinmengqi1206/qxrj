@@ -3,8 +3,6 @@
 ![xxsc](miniprogram/images/logo.png)
 
 _「记录当下情绪，探索内心成长」_
-
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![WeChat Mini Program](https://img.shields.io/badge/Platform-WeChat_Mini_Program-green.svg)](https://developers.weixin.qq.com/miniprogram/dev/framework/)
 
 一款帮助用户记录日常情绪的微信小程序，通过即时记录，助你更好地理解和管理情绪状态。 -后续计划，添加深度分析等功能
