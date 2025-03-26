@@ -1,0 +1,54 @@
+<!-- pages/statistics/statistics.wxml -->
+<view class="container">
+    <!-- Tabbar -->
+    <view class="tabbar">
+        <view class="tab-item {{currentTab === 'day' ? 'active' : ''}}" bindtap="switchTab" data-tab="day">
+            每日情绪
+        </view>
+        <view class="tab-item {{currentTab === 'week' ? 'active' : ''}}" bindtap="switchTab" data-tab="week">
+            七日情绪
+        </view>
+    </view>
+    <!-- 情绪动画容器 -->
+    <view class="emotion-animation-container">
+        <canvas type="2d" id="emotionCanvas" class="emotion-canvas" bindtouchstart="onCanvasTouch"></canvas>
+    </view>
+    <!-- 情绪详情弹窗 -->
+    <view class="emotion-detail-modal" wx:if="{{showModal}}">
+        <view class="modal-content">
+            <view class="modal-header">
+                <image class="emotion-icon" src="../../images/icons/{{selectedEmotion.type}}.png" />
+                <text class="emotion-name">{{selectedEmotion.name}}</text>
+                <text class="emotion-time">
+                    {{selectedEmotion.recordType === 'daily' ? '当日情绪' : '瞬时情绪'}}
+                </text>
+            </view>
+            <view class="modal-body">
+                <view class="emotion-value">情绪值：{{selectedEmotion.value}}</view>
+                <view class="emotion-details" wx:if="{{selectedEmotion.details.length > 0}}">
+                    <text class="section-title">详细感受：</text>
+                    <view class="detail-tags">
+                        <text wx:for="{{selectedEmotion.details}}" wx:key="*this" class="tag">
+                            {{item}}
+                        </text>
+                    </view>
+                </view>
+                <view class="emotion-factors" wx:if="{{selectedEmotion.factors.length > 0}}">
+                    <text class="section-title">情绪因素：</text>
+                    <view class="factor-tags">
+                        <text wx:for="{{selectedEmotion.factors}}" wx:key="*this" class="tag">
+                            {{item}}
+                        </text>
+                    </view>
+                </view>
+                <view class="emotion-context" wx:if="{{selectedEmotion.customContext}}">
+                    <text class="section-title">具体情境：</text>
+                    <text class="context-text">{{selectedEmotion.customContext}}</text>
+                </view>
+            </view>
+            <view class="modal-footer">
+                <button bindtap="closeModal">关闭</button>
+            </view>
+        </view>
+    </view>
+</view>

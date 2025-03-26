@@ -59,13 +59,21 @@ Page({
     
     // 创建情绪记录
     const emotion = {
+      // 情绪状态（veryUnhappy，unhappy，slightlyUnhappy，neutral，slightlyHappy，happy，veryHappy）
       type: selectedEmotion.type,
+      // 情绪状态 中文名
       name: selectedEmotion.name,
+      //具体情绪分（0-100）
       value: selectedEmotion.value,
+      //情绪详细感受,数据结构是数组
       details: selectedDetails,
+      //情绪因素，数据结构是数组
       factors: selectedFactors,
+      //自定义情境，字符串
       customContext: customContext,
+      //记录类型，daily为当日情绪，current为瞬时情绪
       recordType: recordType,
+      //记录时间戳
       timestamp: getApp().globalData.timestamp
     }
     

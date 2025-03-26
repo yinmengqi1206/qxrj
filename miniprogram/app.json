@@ -4,7 +4,8 @@
     "pages/emotion-type/emotion-type",
     "pages/emotion-selector/emotion-selector",
     "pages/emotion-details/emotion-details",
-    "pages/emotion-factors/emotion-factors"
+    "pages/emotion-factors/emotion-factors",
+    "pages/statistics/statistics"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -12,10 +13,30 @@
     "navigationBarTitleText": "情绪日记小助手",
     "navigationBarTextStyle": "black"
   },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "记录",
+        "iconPath": "images/record.png",
+        "selectedIconPath": "images/record-active.png"
+      },
+      {
+        "pagePath": "pages/statistics/statistics",
+        "text": "统计",
+        "iconPath": "images/stats.png",
+        "selectedIconPath": "images/stats-active.png"
+      }
+    ]
+  },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-        "calendar": "@lspriv/wx-calendar"
+    "calendar": "@lspriv/wx-calendar"
   }
 }
