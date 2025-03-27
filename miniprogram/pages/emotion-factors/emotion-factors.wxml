@@ -29,11 +29,11 @@
                 </view>
             </view>
         </view>
-        <view class="bg-white rounded-xl p-4 mb-16">
+        <view class="bg-white rounded-xl p-4 mb-4">
             <view class="text-gray-500 mb-2">更多情景（选填）</view>
             <textarea class="w-full p-2 border border-gray-200 rounded-lg" placeholder="请描述更多情景..." bindinput="inputCustomContext" value="{{customContext}}" style="height: 100px;"></textarea>
         </view>
-        <view class="fixed-bottom p-4 bg-white">
+        <view class="fixed-bottom p-4 bg-white" style="position:relative">
             <button bindtap="complete" class="btn btn-primary w-full">完成</button>
         </view>
     </view>
