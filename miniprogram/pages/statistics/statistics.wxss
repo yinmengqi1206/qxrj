@@ -44,6 +44,8 @@
   position: relative;
   background: #fff;
   overflow: hidden;
+  padding: 20rpx;
+  box-sizing: border-box;
 }
 
 .emotion-canvas {
@@ -83,20 +85,20 @@
 }
 
 .modal-header {
-  padding: 30rpx;
+  padding: 24rpx;
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid #eee;
 }
 
 .emotion-icon {
-  width: 80rpx;
-  height: 80rpx;
-  margin-right: 20rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 16rpx;
 }
 
 .emotion-name {
-  font-size: 32rpx;
+  font-size: 30rpx;
   font-weight: bold;
   margin-right: auto;
 }
@@ -107,36 +109,30 @@
 }
 
 .modal-body {
-  padding: 30rpx;
+  padding: 24rpx;
   flex: 1;
   overflow-y: auto;
+  max-height: 60vh;
 }
 
 .emotion-value {
   font-size: 28rpx;
   color: #333;
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 
 .section-title {
   font-size: 28rpx;
   color: #666;
-  margin: 20rpx 0 10rpx;
+  margin: 16rpx 0 12rpx;
   display: block;
 }
 
-.detail-tags, .factor-tags {
+.tags{
   display: flex;
   flex-wrap: wrap;
-  gap: 10rpx;
-}
-
-.tag {
-  padding: 8rpx 20rpx;
-  background: rgba(0, 122, 255, 0.1);
-  color: #007AFF;
-  font-size: 24rpx;
-  border-radius: 30rpx;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
 }
 
 .context-text {
@@ -152,14 +148,18 @@
   justify-content: center;
 }
 
-.modal-footer button {
-  width: 200rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  background: #007AFF;
-  color: #fff;
-  font-size: 28rpx;
-  border-radius: 35rpx;
+.modal-btn {
+  width: 180rpx !important;
+  height: 70rpx !important;
+  line-height: 70rpx !important;
+  background: #007AFF !important;
+  color: #fff !important;
+  font-size: 28rpx !important;
+  border-radius: 35rpx !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 /* 分析按钮样式 */
@@ -204,11 +204,11 @@
 }
 
 .loading-icon {
-  width: 80rpx;
-  height: 80rpx;
+  width: 60rpx;
+  height: 60rpx;
   margin-bottom: 20rpx;
-  border: 6rpx solid #f3f3f3;
-  border-top: 6rpx solid #007AFF;
+  border: 4rpx solid #f3f3f3;
+  border-top: 4rpx solid #007AFF;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -238,20 +238,20 @@
 }
 
 .analysis-modal .modal-header {
-  padding: 30rpx;
+  padding: 24rpx;
   text-align: center;
   border-bottom: 1rpx solid #eee;
 }
 
 .modal-title {
-  font-size: 34rpx;
+  font-size: 32rpx;
   font-weight: bold;
   color: #333;
 }
 
 .analysis-content {
-  padding: 30rpx;
-  max-height: 50vh;
+  padding: 24rpx;
+  max-height: 60vh;
   font-size: 28rpx;
   line-height: 1.6;
   color: #333;
@@ -281,7 +281,7 @@
 }
 
 .empty-modal .modal-body {
-  padding: 40rpx 30rpx;
+  padding: 32rpx 24rpx;
   text-align: center;
 }
 
@@ -289,14 +289,4 @@
   font-size: 30rpx;
   color: #333;
   line-height: 1.5;
-}
-
-.empty-modal .modal-footer button {
-  width: 200rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  background: #007AFF;
-  color: #fff;
-  font-size: 28rpx;
-  border-radius: 35rpx;
 }
