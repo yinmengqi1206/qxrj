@@ -415,7 +415,7 @@ Page({
     }));
 
     // 构建提示词
-    const prompt = `您现在是个心理医生小姐姐，请根据我的情绪记录数据，帮我分析情绪,主要从情绪比例和情绪场景来分析，然后并给出一定的心理指导，或鼓励，或认可，希望可以语气温柔，给人力量+${JSON.stringify(emotionsData)}(要求：无需markdown格式)`;
+    const prompt = `您现在是个心理医生小姐姐，请根据我的情绪记录数据，帮我分析情绪,主要从情绪比例和情绪场景来分析，然后并给出一定的心理指导，或鼓励，或认可，希望可以语气温柔，给人力量+${JSON.stringify(emotionsData)}(要求：1.无需markdown格式,2.一次性回答，以'祝您生活愉快！'结束)`;
 
     // 调用分析API
     siliconflow.call(prompt)
