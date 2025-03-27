@@ -9,10 +9,50 @@
         <view class="tab-item {{currentTab === 'week' ? 'active' : ''}}" bindtap="switchTab" data-tab="week">
             七日情绪
         </view>
+        <!-- 分析按钮 -->
+        <view class="analyze-button-container">
+            <button class="analyze-button" bindtap="analyzeEmotion">分析情绪</button>
+        </view>
+        <!-- 分析Loading弹窗 -->
+        <view class="loading-modal" wx:if="{{showLoadingModal}}">
+            <view class="loading-content">
+                <view class="loading-icon"></view>
+                <text>分析中...</text>
+            </view>
+        </view>
+        <!-- 分析结果弹窗 -->
+        <view class="analysis-modal" wx:if="{{showAnalysisModal}}">
+            <view class="modal-content">
+                <view class="modal-header">
+                    <text class="modal-title">情绪分析报告</text>
+                </view>
+                <view class="modal-body">
+                    <scroll-view scroll-y class="analysis-content">{{analysisResult}}</scroll-view>
+                </view>
+                <view class="modal-footer">
+                    <button style="line-height: normal; padding: 20rpx 0;" bindtap="closeAnalysisModal">
+                        关闭
+                    </button>
+                </view>
+            </view>
+        </view>
     </view>
     <!-- 情绪动画容器 -->
     <view class="emotion-animation-container">
         <canvas type="2d" id="emotionCanvas" class="emotion-canvas" bindtouchstart="onCanvasTouch"></canvas>
+    </view>
+    <!-- 空数据提示弹窗 -->
+    <view class="empty-modal" wx:if="{{showEmptyModal}}">
+        <view class="modal-content">
+            <view class="modal-body">
+                <text class="empty-text">您还没有情绪记录，快去记录吧~</text>
+            </view>
+            <view class="modal-footer">
+                <button style="line-height: normal; padding: 20rpx 0;" bindtap="goToRecord">
+                    去记录
+                </button>
+            </view>
+        </view>
     </view>
     <!-- 情绪详情弹窗 -->
     <view class="emotion-detail-modal" wx:if="{{showModal}}">

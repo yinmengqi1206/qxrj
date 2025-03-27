@@ -2,7 +2,6 @@
 const emotionData = require('../../utils/emotion-data.js')
 const util = require('../../utils/util.js')
 const cloud = require('../../utils/cloud.js')
-const siliconflow = require('../../utils/siliconflow.js')
 const { WxCalendar } = require('@lspriv/wx-calendar/lib');
 const { LunarPlugin } = require('@lspriv/wc-plugin-lunar');
 const tool = require('../../utils/tool.js')

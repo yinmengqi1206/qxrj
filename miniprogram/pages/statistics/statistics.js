@@ -1,4 +1,5 @@
 const emotionData = require('../../utils/emotion-data.js')
+const siliconflow = require('../../utils/siliconflow.js')
 
 // 定义EmotionBall类来管理每个情绪球的状态和动画
 class EmotionBall {
@@ -133,7 +134,11 @@ Page({
     currentTab: 'day',
     emotions: [],
     showModal: false,
-    selectedEmotion: null
+    selectedEmotion: null,
+    showLoadingModal: false,
+    showAnalysisModal: false,
+    showEmptyModal: false,
+    analysisResult: ''
   },
 
   onLoad: function () {
@@ -386,5 +391,68 @@ Page({
     if (this.animationFrameId && this.canvas) {
       this.canvas.cancelAnimationFrame(this.animationFrameId)
     }
+  },
+
+  // 分析情绪
+  analyzeEmotion: function() {
+    // 检查是否有情绪数据
+    if (!this.data.emotions || this.data.emotions.length === 0) {
+      this.setData({ showEmptyModal: true });
+      return;
+    }
+
+    // 显示loading
+    this.setData({ showLoadingModal: true });
+
+    // 准备分析的情绪数据
+    const emotionsData = this.data.emotions.map(emotion => ({
+      type: emotion.type,
+      value: emotion.value,
+      details: emotion.details || [],
+      factors: emotion.factors || [],
+      customContext: emotion.customContext || '',
+      timestamp: emotion.timestamp
+    }));
+
+    // 构建提示词
+    const prompt = `您现在是个心理医生小姐姐，请根据我的情绪记录数据，帮我分析情绪,主要从情绪比例和情绪场景来分析，然后并给出一定的心理指导，或鼓励，或认可，希望可以语气温柔，给人力量+${JSON.stringify(emotionsData)}(要求：无需markdown格式)`;
+
+    // 调用分析API
+    siliconflow.call(prompt)
+    .then(res => {
+      if(res==='0'){
+        wx.showToast({
+          title: '分析失败，请稍后重试',
+          icon: 'none'
+        });
+        this.setData({ showLoadingModal: false });
+        return;
+      }else{
+        // 隐藏loading，显示分析结果
+        this.setData({
+          showLoadingModal: false,
+          showAnalysisModal: true,
+          analysisResult: res
+        });
+      }
+    });
+  },
+
+  // 关闭分析结果弹窗
+  closeAnalysisModal: function() {
+    this.setData({ showAnalysisModal: false });
+  },
+
+  // 关闭空数据提示弹窗
+  closeEmptyModal: function() {
+    this.setData({ showEmptyModal: false });
+  },
+
+  // 跳转到记录页面
+  goToRecord: function() {
+    this.setData({ showEmptyModal: false });
+    wx.switchTab({
+      url: '/pages/index/index'
+    });
   }
 })
