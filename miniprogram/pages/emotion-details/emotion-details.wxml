@@ -1,5 +1,5 @@
 <!-- pages/emotion-details/emotion-details.wxml -->
-<wxs module="includes" src="../../utils/includes.wxs"></wxs>
+<wxs module="utils" src="../../utils/util.wxs"></wxs>
 <view class="container bg-gray-100">
     <view class="header p-4 flex items-center bg-white">
         <view class="back-icon text-blue-500" bindtap="goBack">
@@ -22,7 +22,7 @@
         <view class="bg-white rounded-xl p-4 mb-4">
             <view class="text-gray-500 mb-4">您的感受是什么？（可多选）</view>
             <view class="flex flex-wrap">
-                <view wx:for="{{detailOptions}}" wx:key="*this" class="{{includes.includes(selectedDetails,item) ? 'tag tag-selected' : 'tag'}}" data-detail="{{item}}" bindtap="toggleDetail">
+                <view wx:for="{{detailOptions}}" wx:key="*this" class="{{utils.includes(selectedDetails,item) ? 'tag tag-selected' : 'tag'}}" data-detail="{{item}}" bindtap="toggleDetail">
                     {{item}}
                 </view>
             </view>

@@ -1,7 +1,0 @@
-var includes = function (array, searchElement) {
-    return array.indexOf(searchElement) !== -1
-  }
-  module.exports = {
-    includes: includes
-  }
-  

@@ -1,4 +1,5 @@
 <!-- pages/statistics/statistics.wxml -->
+<wxs module="utils" src="../../utils/util.wxs"></wxs>
 <view class="container">
     <!-- Tabbar -->
     <view class="tabbar">
@@ -20,7 +21,7 @@
                 <image class="emotion-icon" src="../../images/icons/{{selectedEmotion.type}}.png" />
                 <text class="emotion-name">{{selectedEmotion.name}}</text>
                 <text class="emotion-time">
-                    {{selectedEmotion.recordType === 'daily' ? '当日情绪' : '瞬时情绪'}}
+                    {{selectedEmotion.recordType === 'daily' ? utils.formatDate(selectedEmotion.timestamp): utils.formatDateTime(selectedEmotion.timestamp)}}
                 </text>
             </view>
             <view class="modal-body">
@@ -28,7 +29,7 @@
                 <view class="emotion-details" wx:if="{{selectedEmotion.details.length > 0}}">
                     <text class="section-title">详细感受：</text>
                     <view class="detail-tags">
-                        <text wx:for="{{selectedEmotion.details}}" wx:key="*this" class="tag">
+                        <text wx:for="{{selectedEmotion.details}}" wx:key="*this" class="tag" style="line-height: normal;">
                             {{item}}
                         </text>
                     </view>
@@ -36,7 +37,7 @@
                 <view class="emotion-factors" wx:if="{{selectedEmotion.factors.length > 0}}">
                     <text class="section-title">情绪因素：</text>
                     <view class="factor-tags">
-                        <text wx:for="{{selectedEmotion.factors}}" wx:key="*this" class="tag">
+                        <text wx:for="{{selectedEmotion.factors}}" wx:key="*this" class="tag" style="line-height: normal;">
                             {{item}}
                         </text>
                     </view>
@@ -47,7 +48,9 @@
                 </view>
             </view>
             <view class="modal-footer">
-                <button bindtap="closeModal">关闭</button>
+                <button style="line-height: normal; padding: 20rpx 0;" bindtap="closeModal">
+                    关闭
+                </button>
             </view>
         </view>
     </view>

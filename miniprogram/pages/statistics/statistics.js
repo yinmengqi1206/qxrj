@@ -139,6 +139,20 @@ Page({
   onLoad: function () {
     this.getEmotions()
   },
+  onShow: function () {
+    // 为当前小球添加淡出效果
+    if (this.emotionBalls) {
+      this.emotionBalls.forEach(ball => {
+        ball.targetAlpha = 0
+      })
+      // 等待淡出动画完成后再切换
+      setTimeout(() => {
+        this.getEmotions()
+      }, 500)
+    } else {
+      this.getEmotions()
+    }
+  },
 
   switchTab: function (e) {
     const tab = e.currentTarget.dataset.tab
