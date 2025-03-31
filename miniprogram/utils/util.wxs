@@ -11,6 +11,15 @@ var formatDate = function formatTime(timestamp) {
     return [year, month, day].map(formatNumber).join('-')
 }
 
+var formatTime = function formatTime(timestamp) {
+    var date = getDate(timestamp)
+    var hour = date.getHours()
+    var minute = date.getMinutes()
+    var second = date.getSeconds()
+
+    return [hour, minute, second].map(formatNumber).join(':')
+}
+
 var formatDateTime = function formatDateTime(timestamp) {
     var date = getDate(timestamp)
     var year = date.getFullYear()
@@ -30,5 +39,6 @@ var formatNumber = function(n) {
 module.exports = {
     formatDate: formatDate,
     formatDateTime: formatDateTime,
-    includes: includes
+    includes: includes,
+    formatTime: formatTime
 }

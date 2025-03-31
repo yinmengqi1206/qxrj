@@ -345,12 +345,6 @@
   max-height: 60vh;
 }
 
-.emotion-value {
-  font-size: 28rpx;
-  color: #333;
-  margin-bottom: 16rpx;
-}
-
 .section-title {
   font-size: 28rpx;
   color: #666;

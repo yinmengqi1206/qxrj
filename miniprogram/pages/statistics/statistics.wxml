@@ -125,8 +125,8 @@
         <view class="emotion-list">
             <view wx:for="{{groupedByDay}}" wx:key="day" class="day-group">
                 <view class="day-header" bindtap="toggleDayGroup" data-day="{{item.day}}">
-                    <text class="day-text">{{item.day}}</text>
-                    <text class="day-count">({{item.emotions.length}}条)</text>
+                    <view class="day-text">{{item.day}}</view>
+                    <view class="day-count">({{item.emotions.length}}条)</view>
                     <view class="arrow {{item.expanded ? 'expanded' : ''}}"></view>
                 </view>
                 <view class="day-emotions {{item.expanded ? 'expanded' : ''}}">
@@ -134,10 +134,7 @@
                         <view class="emotion-time">{{utils.formatTime(emotion.timestamp)}}</view>
                         <view class="emotion-info">
                             <image class="emotion-type-icon" src="../../images/icons/{{emotion.type}}.png" />
-                            <text class="emotion-value">情绪值：{{emotion.value}}</text>
-                            <text class="emotion-context" wx:if="{{emotion.customContext}}">
-                                {{emotion.customContext}}
-                            </text>
+                            <view class="emotion-value">情绪值：{{emotion.value}}</view>
                         </view>
                     </view>
                 </view>
