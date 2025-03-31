@@ -4,10 +4,10 @@
     <!-- Tabbar -->
     <view class="tabbar">
         <view class="tab-item {{currentTab === 'day' ? 'active' : ''}}" bindtap="switchTab" data-tab="day">
-            每日情绪
+            当天情绪
         </view>
         <view class="tab-item {{currentTab === 'week' ? 'active' : ''}}" bindtap="switchTab" data-tab="week">
-            七日情绪
+            本周情绪
         </view>
         <!-- 分析按钮 -->
         <view class="analyze-button-container">
