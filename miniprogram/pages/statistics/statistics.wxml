@@ -9,6 +9,9 @@
         <view class="tab-item {{currentTab === 'week' ? 'active' : ''}}" bindtap="switchTab" data-tab="week">
             本周情绪
         </view>
+        <view class="tab-item {{currentTab === 'stats' ? 'active' : ''}}" bindtap="switchTab" data-tab="stats">
+            情绪统计
+        </view>
         <!-- 分析按钮 -->
         <view class="analyze-button-container">
             <button class="analyze-button" bindtap="analyzeEmotion">情绪小助手</button>
@@ -36,8 +39,110 @@
         </view>
     </view>
     <!-- 情绪动画容器 -->
-    <view class="emotion-animation-container">
+    <view class="emotion-animation-container" wx:if="{{currentTab !== 'stats'}}">
         <canvas type="2d" id="emotionCanvas" class="emotion-canvas" bindtouchstart="onCanvasTouch"></canvas>
+    </view>
+    <!-- 情绪统计内容 -->
+    <view class="stats-container" wx:if="{{currentTab === 'stats'}}">
+        <!-- 统计概览 -->
+        <view class="stats-overview">
+            <!-- 基础统计 -->
+            <view class="stats-section">
+                <view class="stats-card">
+                    <text class="stats-label">记录总数</text>
+                    <text class="stats-value">{{totalCount}}</text>
+                </view>
+                <view class="stats-card">
+                    <text class="stats-label">平均情绪值</text>
+                    <text class="stats-value">{{averageValue}}</text>
+                </view>
+                <view class="stats-card">
+                    <text class="stats-label">最常见情绪</text>
+                    <image class="stats-emotion-icon" src="../../images/icons/{{mostFrequentEmotion}}.png" />
+                </view>
+            </view>
+            <!-- 情绪分布 -->
+            <view class="stats-distribution">
+                <text class="stats-title">情绪分布</text>
+                <view class="emotion-bars">
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/veryHappy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.veryHappy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.veryHappy}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/happy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.happy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.happy}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/slightlyHappy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.slightlyHappy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.slightlyHappy}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/neutral.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.neutral / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.neutral}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/slightlyUnhappy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.slightlyUnhappy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.slightlyUnhappy}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/unhappy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.unhappy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.unhappy}}</text>
+                    </view>
+                    <view class="emotion-bar">
+                        <image class="bar-icon" src="../../images/icons/veryUnhappy.png" />
+                        <view class="bar-wrapper">
+                            <view class="bar-fill" style="width: {{(emotionStats.veryUnhappy / totalCount * 100) || 0}}%"></view>
+                        </view>
+                        <text class="bar-count">{{emotionStats.veryUnhappy}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 导出按钮 -->
+        <!-- <view class="export-button-container">
+            <button class="export-button" bindtap="exportEmotions">导出记录</button>
+        </view> -->
+        <!-- 情绪列表 -->
+        <view class="emotion-list">
+            <view wx:for="{{groupedByDay}}" wx:key="day" class="day-group">
+                <view class="day-header" bindtap="toggleDayGroup" data-day="{{item.day}}">
+                    <text class="day-text">{{item.day}}</text>
+                    <text class="day-count">({{item.emotions.length}}条)</text>
+                    <view class="arrow {{item.expanded ? 'expanded' : ''}}"></view>
+                </view>
+                <view class="day-emotions {{item.expanded ? 'expanded' : ''}}">
+                    <view wx:for="{{item.emotions}}" wx:for-item="emotion" wx:for-index="emotionIndex" wx:key="emotionIndex" class="emotion-item" bindtap="showEmotionDetail" data-emotion="{{emotion}}">
+                        <view class="emotion-time">{{utils.formatTime(emotion.timestamp)}}</view>
+                        <view class="emotion-info">
+                            <image class="emotion-type-icon" src="../../images/icons/{{emotion.type}}.png" />
+                            <text class="emotion-value">情绪值：{{emotion.value}}</text>
+                            <text class="emotion-context" wx:if="{{emotion.customContext}}">
+                                {{emotion.customContext}}
+                            </text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
     <!-- 空数据提示弹窗 -->
     <view class="empty-modal" wx:if="{{showEmptyModal}}">

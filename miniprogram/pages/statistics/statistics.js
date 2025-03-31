@@ -155,16 +155,81 @@ class EmotionBall {
   }
 }
 
+const formatDate = (timestamp) => {
+  const date = new Date(timestamp)
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
+}
+
+// 按天分组情绪数据
+const groupEmotionsByDay = (emotions) => {
+  const groups = {}
+  emotions.forEach(emotion => {
+    const day = formatDate(emotion.timestamp)
+    if (!groups[day]) {
+      groups[day] = {
+        day,
+        emotions: [],
+        expanded: false
+      }
+    }
+    groups[day].emotions.push(emotion)
+  })
+  return Object.values(groups).sort((a, b) => {
+    return new Date(b.emotions[0].timestamp) - new Date(a.emotions[0].timestamp)
+  })
+}
+
+// 计算情绪统计数据
+const calculateStats = (emotions) => {
+  if (!emotions || emotions.length === 0) {
+    return {
+      totalCount: 0,
+      averageValue: 0,
+      mostFrequentEmotion: 'neutral'
+    }
+  }
+
+  const totalCount = emotions.length
+  const averageValue = (emotions.reduce((sum, e) => sum + e.value, 0) / totalCount).toFixed(1)
+  
+  // 计算最常见情绪类型
+  const typeCount = {}
+  emotions.forEach(e => {
+    typeCount[e.type] = (typeCount[e.type] || 0) + 1
+  })
+  const mostFrequentEmotion = Object.entries(typeCount)
+    .sort((a, b) => b[1] - a[1])[0][0]
+
+  return {
+    totalCount,
+    averageValue,
+    mostFrequentEmotion
+  }
+}
+
 Page({
   data: {
     currentTab: 'day',
     emotions: [],
+    groupedByDay: [],
     showModal: false,
     selectedEmotion: null,
     showLoadingModal: false,
     showAnalysisModal: false,
     showEmptyModal: false,
-    analysisResult: ''
+    analysisResult: '',
+    totalCount: 0,
+    averageValue: 0,
+    mostFrequentEmotion: 'neutral',
+    emotionStats: {
+      veryHappy: 0,
+      happy: 0,
+      slightlyHappy: 0,
+      neutral: 0,
+      slightlyUnhappy: 0,
+      unhappy: 0,
+      veryUnhappy: 0
+    }
   },
 
   onLoad: function () {
@@ -205,12 +270,13 @@ Page({
   getEmotions: function () {
     const { currentTab } = this.data
     let emotions = []
+    
     if (currentTab === 'day') {
       emotions = emotionData.getTodayEmotions()
-    } else {
+    } else if (currentTab === 'week') {
       const today = new Date()
       const weekStart = new Date(today)
-      weekStart.setDate(today.getDate() - today.getDay())
+      weekStart.setDate(today.getDate() - today.getDay()+1)
       
       for (let i = 0; i < 7; i++) {
         const date = new Date(weekStart)
@@ -218,15 +284,29 @@ Page({
         const dayEmotions = emotionData.getTodayEmotions(date)
         emotions = emotions.concat(dayEmotions)
       }
+    } else if (currentTab === 'stats') {
+      emotions = emotionData.getEmotions()
+      const stats = calculateStats(emotions)
+      const emotionStats = emotionData.getEmotionStats()
+      
+      this.setData({
+        emotions,
+        ...stats,
+        emotionStats,
+        groupedByDay: groupEmotionsByDay(emotions)
+      })
+      return
     }
 
-    this.setData({ emotions }, () => {
+    this.setData({ 
+      emotions
+    }, () => {
       if (this.canvas) {
         if (this.animationFrameId) {
           this.canvas.cancelAnimationFrame(this.animationFrameId)
         }
+        this.initCanvas()
       }
-      this.initCanvas()
     })
   },
 
@@ -329,21 +409,85 @@ Page({
       })
   },
 
-  showEmotionDetail: function (emotion) {
+  toggleDayGroup: function(e) {
+    const { day } = e.currentTarget.dataset
+    const { groupedByDay } = this.data
+    
+    const updatedGroups = groupedByDay.map(group => {
+      if (group.day === day) {
+        return { ...group, expanded: !group.expanded }
+      }
+      return group
+    })
+    
+    this.setData({
+      groupedByDay: updatedGroups
+    })
+  },
+
+  showEmotionDetail: function(e) {
+    let emotion
+    if (e.currentTarget) {
+      emotion = e.currentTarget.dataset.emotion
+    } else {
+      emotion = e
+    }
     this.setData({
       showModal: true,
       selectedEmotion: emotion
     })
   },
 
-  closeModal: function () {
-    this.setData({
-      showModal: false,
-      selectedEmotion: null
+  exportEmotions: function() {
+    const { emotions } = this.data
+    if (!emotions || emotions.length === 0) {
+      wx.showToast({
+        title: '暂无数据可导出',
+        icon: 'none'
+      })
+      return
+    }
+
+    const formatData = emotions.map(e => ({
+      日期: new Date(e.timestamp).toLocaleString(),
+      情绪类型: e.type,
+      情绪值: e.value,
+      详细感受: (e.details || []).join('、'),
+      情绪因素: (e.factors || []).join('、'),
+      具体情境: e.customContext || ''
+    }))
+
+    // 转换为CSV格式
+    const headers = Object.keys(formatData[0])
+    const csv = [
+      headers.join(','),
+      ...formatData.map(row => headers.map(header => `"${row[header] || ''}"`).join(','))
+    ].join('\n')
+
+    // 使用微信文件系统保存
+    const fileName = `emotions_${new Date().getTime()}.csv`
+    const filePath = `${wx.env.USER_DATA_PATH}/${fileName}`
+    
+    // 直接复制到剪贴板
+    wx.setClipboardData({
+      data: csv,
+      success: () => {
+        wx.showModal({
+          title: '导出成功',
+          content: '数据已复制到剪贴板，可直接粘贴使用',
+          showCancel: false
+        })
+      },
+      fail: () => {
+        wx.showToast({
+          title: '导出失败',
+          icon: 'none'
+        })
+      }
     })
   },
 
-  startAnimation: function () {
+  startAnimation: function() {
     if (!this.ctx || !this.emotionBalls) return
 
     const animate = () => {
@@ -360,19 +504,20 @@ Page({
     animate()
   },
 
-  onUnload: function () {
-    if (this.animationFrameId && this.canvas) {
-      this.canvas.cancelAnimationFrame(this.animationFrameId)
-    }
+  closeModal: function() {
+    this.setData({
+      showModal: false,
+      selectedEmotion: null
+    })
   },
 
   analyzeEmotion: function() {
     if (!this.data.emotions || this.data.emotions.length === 0) {
-      this.setData({ showEmptyModal: true });
-      return;
+      this.setData({ showEmptyModal: true })
+      return
     }
 
-    this.setData({ showLoadingModal: true });
+    this.setData({ showLoadingModal: true })
 
     const emotionsData = this.data.emotions.map(emotion => ({
       type: emotion.type,
@@ -381,41 +526,41 @@ Page({
       factors: emotion.factors || [],
       customContext: emotion.customContext || '',
       timestamp: emotion.timestamp
-    }));
+    }))
 
-    const prompt = `(要求：1.不使用markdown格式,2.一次性回答，以'祝您生活愉快！'结束)，您现在是个心理医生小姐姐，请根据我的情绪记录数据，帮我分析情绪,主要从情绪比例和情绪场景来分析，然后并给出一定的心理指导，或鼓励，或认可，希望可以语气温柔，给人力量,情绪数据如下:${JSON.stringify(emotionsData)}`;
+    const prompt = `(要求：1.不使用markdown格式,2.一次性回答，以'祝您生活愉快！'结束)，您现在是个心理医生小姐姐，请根据我的情绪记录数据，帮我分析情绪,主要从情绪比例和情绪场景来分析，然后并给出一定的心理指导，或鼓励，或认可，希望可以语气温柔，给人力量,情绪数据如下:${JSON.stringify(emotionsData)}`
 
     siliconflow.call(prompt)
-    .then(res => {
-      if(res==='0'){
-        wx.showToast({
-          title: '分析失败，请稍后重试',
-          icon: 'none'
-        });
-        this.setData({ showLoadingModal: false });
-        return;
-      }else{
-        this.setData({
-          showLoadingModal: false,
-          showAnalysisModal: true,
-          analysisResult: res
-        });
-      }
-    });
+      .then(res => {
+        if (res === '0') {
+          wx.showToast({
+            title: '分析失败，请稍后重试',
+            icon: 'none'
+          })
+          this.setData({ showLoadingModal: false })
+          return
+        } else {
+          this.setData({
+            showLoadingModal: false,
+            showAnalysisModal: true,
+            analysisResult: res
+          })
+        }
+      })
   },
 
   closeAnalysisModal: function() {
-    this.setData({ showAnalysisModal: false });
+    this.setData({ showAnalysisModal: false })
   },
 
   closeEmptyModal: function() {
-    this.setData({ showEmptyModal: false });
+    this.setData({ showEmptyModal: false })
   },
 
   goToRecord: function() {
-    this.setData({ showEmptyModal: false });
+    this.setData({ showEmptyModal: false })
     wx.switchTab({
       url: '/pages/index/index'
-    });
+    })
   }
 })
