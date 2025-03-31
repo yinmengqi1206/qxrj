@@ -270,7 +270,6 @@
   width: auto;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 40rpx;
-  padding: 8rpx;
   box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
 }
 
