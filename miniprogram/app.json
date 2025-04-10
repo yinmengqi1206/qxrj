@@ -5,7 +5,10 @@
     "pages/emotion-selector/emotion-selector",
     "pages/emotion-details/emotion-details",
     "pages/emotion-factors/emotion-factors",
-    "pages/statistics/statistics"
+    "pages/statistics/statistics",
+    "pages/tools/tools",
+    "pages/tools-2048/tools-2048",
+    "pages/tools-draw/tools-draw"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -23,13 +26,19 @@
         "pagePath": "pages/index/index",
         "text": "记录",
         "iconPath": "images/record.png",
-        "selectedIconPath": "images/record-active.png"
+        "selectedIconPath": "images/record.png"
+      },
+      {
+        "pagePath": "pages/tools/tools",
+        "text": "工具",
+        "iconPath": "images/tools.png",
+        "selectedIconPath": "images/tools.png"
       },
       {
         "pagePath": "pages/statistics/statistics",
         "text": "统计",
         "iconPath": "images/stats.png",
-        "selectedIconPath": "images/stats-active.png"
+        "selectedIconPath": "images/stats.png"
       }
     ]
   },

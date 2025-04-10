@@ -1,0 +1,8 @@
+<view class="tools-container">
+    <view class="tools-grid">
+        <view class="tool-item" wx:for="{{tools}}" wx:key="id" data-path="{{item.path}}" bindtap="onToolTap">
+            <image class="tool-icon" src="{{item.icon}}" mode="aspectFit" />
+            <text class="tool-name">{{item.name}}</text>
+        </view>
+    </view>
+</view>
