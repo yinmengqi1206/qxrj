@@ -1,5 +1,6 @@
 var Board = require("./grid.js");
 var Main = require("./main.js");
+const emotionData = require('../../utils/emotion-data.js');
 
 Page({ 
   data: {
@@ -39,14 +40,39 @@ Page({
   
     if (this.data.score >= 2048) {
       this.setData({ 
-        endMsg: '恭喜达到2048！'
+        endMsg: '恭喜达到2048,已帮您记录情绪！'
       });
       wx.setStorageSync('highScore', this.data.score);
+      
+      // 直接记录情绪
+      emotionData.addEmotion({
+        type: 'veryHappy',
+        name: '非常愉快',
+        value: 100,
+        details: ['兴奋',"满足"],
+        factors: ['游戏'],
+        customContext: '轻轻松松，2048，不服来战',
+        recordType: 'current',
+        timestamp: new Date().getTime()
+      });
+      
     } else if (this.data.score > this.data.bestScore) {
       this.setData({
-        endMsg: '创造新纪录！' 
+        endMsg: '创造新纪录,已帮您记录情绪！' 
       }); 
       wx.setStorageSync('highScore', this.data.score);
+      
+      // 直接记录情绪
+      emotionData.addEmotion({
+        type: 'slightlyHappy',
+        name: '有点愉快',
+        value: 70,
+        details: ['欢快', '满意'],
+        factors: ['游戏'],
+        customContext: `哈哈，破纪录了，${this.data.score}分`,
+        recordType: 'current',
+        timestamp: new Date().getTime()
+      });
     } else {
       this.setData({
         endMsg: '游戏结束！'
