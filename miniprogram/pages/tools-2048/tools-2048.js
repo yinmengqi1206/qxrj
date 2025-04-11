@@ -14,11 +14,37 @@ Page({
   },
   // 页面渲染完成
   onReady: function () {
-    if(!wx.getStorageSync("highScore"))
+    if(!wx.getStorageSync("highScore")) {
       wx.setStorageSync('highScore', 0);
-    this.gameStart();
+    }
+    
+    // 检查是否有保存的游戏
+    const savedGame = wx.getStorageSync('currentGame');
+    if(savedGame) {
+      this.restoreGame(savedGame);
+    } else {
+      this.gameStart();
+    }
+  },
+
+  // 恢复保存的游戏
+  restoreGame: function(savedGame) {
+    var main = new Main(4);
+    this.setData({
+      main: main,
+      bestScore: wx.getStorageSync('highScore'),
+      hidden: true,
+      over: false,
+      score: savedGame.score,
+      num: savedGame.grid,
+      start: "重新开始"
+    });
+    this.data.main.__proto__ = main.__proto__;
+    this.data.main.board.grid = savedGame.grid;
   },
   gameStart: function() {  // 游戏开始
+    // 清除保存的游戏
+    wx.removeStorageSync('currentGame');
     var main = new Main(4);
     this.setData({
       main: main,
@@ -37,6 +63,8 @@ Page({
     this.setData({
       over: true 
     });
+    // 清除保存的游戏
+    wx.removeStorageSync('currentGame');
   
     if (this.data.score >= 2048) {
       this.setData({ 
@@ -120,6 +148,13 @@ Page({
       for(var j = 0; j < 4; j++)
         if(data[i][j] != "" && data[i][j] > max)
           max = data[i][j];
+    
+    // 保存当前游戏状态
+    wx.setStorageSync('currentGame', {
+      grid: data,
+      score: max
+    });
+    
     this.setData({
       num: data,
       score: max
