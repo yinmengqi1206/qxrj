@@ -1,75 +1,14 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: #ffffff;
+/**index.wxss**/
+.item {
+  color: #888;
+  padding: 20px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid rgba(153, 204, 255, 0.3);
 }
-
-.toolbar {
-    padding: 20rpx;
-    background: #f5f5f5;
-    border-bottom: 1rpx solid #e0e0e0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.color-picker {
-    display: flex;
-    gap: 10rpx;
-}
-
-.color-item {
-    width: 40rpx;
-    height: 40rpx;
-    border-radius: 50%;
-    border: 2rpx solid #ddd;
-}
-
-.color-item.selected {
-    border: 4rpx solid #666;
-    transform: scale(1.1);
-}
-
-.line-width-controls {
-    display: flex;
-    gap: 10rpx;
-}
-
-.width-btn {
-    padding: 10rpx 20rpx;
-    background: #ffffff;
-    border: 1rpx solid #ddd;
-    border-radius: 6rpx;
-    font-size: 24rpx;
-}
-
-.width-btn.selected {
-    background: #666;
-    color: #ffffff;
-    border-color: #666;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 20rpx;
-}
-
-.action-btn {
-    font-size: 24rpx;
-    padding: 10rpx 20rpx;
-    background: #ffffff;
-    border: 1rpx solid #ddd;
-    border-radius: 6rpx;
-    min-width: 100rpx;
-}
-
-.action-btn:active {
-    background: #f0f0f0;
-}
-
-.draw-canvas {
-    flex: 1;
-    width: 100%;
-    background: #ffffff;
+.author {
+  color: #999;
+  position: absolute;
+  bottom: 0;
+  padding-left: 20px;
 }

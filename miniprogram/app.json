@@ -8,7 +8,10 @@
     "pages/statistics/statistics",
     "pages/tools/tools",
     "pages/tools-2048/tools-2048",
-    "pages/tools-draw/tools-draw"
+    "pages/tools-draw/tools-draw",
+    "pages/painting/painting",
+    "pages/painting2/painting2",
+    "pages/pixel/pixel"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,23 +1,21 @@
+<!--index.wxml-->
 <view class="container">
-    <view class="toolbar">
-        <view class="color-picker">
-            <view class="color-item {{penColor === color ? 'selected' : ''}}" wx:for="{{colors}}" wx:key="*this" wx:for-item="color" data-color="{{color}}" bindtap="selectColor" style="background-color: {{color}}"></view>
-        </view>
-        <view class="line-width-controls">
-            <view class="width-btn {{lineWidth === 2 ? 'selected' : ''}}" data-width="2" bindtap="adjustLineWidth">
-                细
-            </view>
-            <view class="width-btn {{lineWidth === 4 ? 'selected' : ''}}" data-width="4" bindtap="adjustLineWidth">
-                中
-            </view>
-            <view class="width-btn {{lineWidth === 6 ? 'selected' : ''}}" data-width="6" bindtap="adjustLineWidth">
-                粗
-            </view>
-        </view>
-        <view class="action-buttons">
-            <button class="action-btn" bindtap="clearCanvas">清空</button>
-            <button class="action-btn" bindtap="saveImage">保存</button>
-        </view>
+  <navigator class="item" url="../painting/painting?pageType=whiteBoard">
+    画画
+  </navigator>
+  <navigator class="item" url="../painting2/painting2">
+    涂照片
+  </navigator>
+  <navigator class="item" url='../pixel/pixel'>
+    像素涂鸦
+  </navigator>
+  <navigator class="item" url="../painting/painting?pageType=highlighter">
+    荧光涂鸦
+  </navigator>
+  <view class='author'>
+    <view>designed by soso
+      <navigator url="../version/version" style="text-decoration: underline; display: inline">(version 1.2.4)</navigator>
     </view>
-    <canvas class="draw-canvas" canvas-id="drawCanvas" style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
+    <view>contact: jsososo@outlook.com</view>
+  </view>
 </view>

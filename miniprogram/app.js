@@ -54,7 +54,9 @@ App({
     this.globalData = {
       selectedEmotion: null,
       selectedDetails: [],
-      recordType: ''
+      recordType: '',
+      recordPoints: [], // 添加recordPoints初始化
+      timestamp: null
     }
   },
   
@@ -62,6 +64,7 @@ App({
     timestamp: null,
     selectedEmotion: null,
     selectedDetails: [],
-    recordType: ''
+    recordType: '',
+    recordPoints: [],
   }
 })
