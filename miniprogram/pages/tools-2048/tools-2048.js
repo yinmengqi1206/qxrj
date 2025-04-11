@@ -159,12 +159,5 @@ Page({
       num: data,
       score: max
     });
-  },
-  onShareAppMessage: function() {
-    return {
-      title: '2048小游戏',
-      desc: '来试试你能达到多少分',
-      path: '/page/user?id=123'
-    }
   }
 })

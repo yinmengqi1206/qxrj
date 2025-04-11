@@ -12,8 +12,5 @@ Page({
     wx.authorize({
       scope: 'scope.writePhotosAlbum',
     })
-  },
-
-  onShareAppMessage: function () {
   }
 })
