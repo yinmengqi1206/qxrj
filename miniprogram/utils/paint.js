@@ -15,14 +15,25 @@ export const startTouch = (e, color, width) => {
 // 记录一条线内的每个点
 export const recordPointsFun = (move, draw) => {
   const l = recordPoints.length;
-  recordPoints[l-1].push({ move, draw });
+  if (l > 0 && Array.isArray(recordPoints[l-1])) {
+    recordPoints[l-1].push({
+      move: [move.touches[0].x, move.touches[0].y],
+      draw: [draw.prevPosition[0], draw.prevPosition[1], (move.touches[0].x + draw.prevPosition[0]) / 2, (move.touches[0].y + draw.prevPosition[1]) / 2]
+    });
+  }
 };
 
 // 绘制过程
 export const reDraw = (_this) => {
   const ctx = wx.createCanvasContext('myCanvas');
+  // 清空画布
+  ctx.clearRect(0, 0, 10000, 10000);
+  ctx.setFillStyle(_this.data.bgColor || 'white');
+  ctx.fillRect(0, 0, 10000, 10000);
 
   recordPoints.forEach(line => {
+    if (!Array.isArray(line) || line.length === 0) return;
+    
     const { width, color, x, y } = line[0];
     // 线的宽度
     ctx.setLineWidth(width);
@@ -34,16 +45,19 @@ export const reDraw = (_this) => {
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
 
-    console.log(line);
+    if (_this.data.pageType === 'highlighter' && !_this.data.eraser) {
+      ctx.setShadow(0, 0, 30, color.replace(')', ', 0.6)').replace('rgb', 'rgba'));
+    }
+
     line.forEach((p, i) => {
-      if (i === 0) {
-        return;
-      }
-      ctx.moveTo(...p.move);
-      ctx.quadraticCurveTo(...p.draw);
+      if (i === 0) return;
+      if (!p.move || !p.draw) return;
+      
+      ctx.moveTo(p.move[0], p.move[1]);
+      ctx.quadraticCurveTo(p.draw[0], p.draw[1], p.draw[2], p.draw[3]);
       ctx.stroke();
-      ctx.draw(true);
     });
+    ctx.draw(true);
   });
 
   _this.setData({

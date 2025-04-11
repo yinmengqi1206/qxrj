@@ -62,6 +62,7 @@ function tapBtn(e, _this, pageType) {
         width: !_this.data.width,
         color: false,
         clear: false,
+        eraser: false, // 自动切换回画笔模式
         ...c,
       });
       return;
