@@ -43,7 +43,8 @@ function changeWidth(e, _this, canvasHeight, pageType) {
 
 // 点击按钮触发的事件
 function tapBtn(e, _this, pageType) {
-  let btnType = e.target.dataset.type;
+  // 使用currentTarget而不是target，这样可以获取到事件绑定的节点（父容器）的数据
+  let btnType = e.currentTarget.dataset.type;
 
   let c = {};
 

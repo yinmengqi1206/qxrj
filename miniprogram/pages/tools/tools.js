@@ -3,13 +3,13 @@ Page({
     tools: [
       {
         id: '2048',
-        name: '2048游戏',
+        name: '2048',
         icon: '/images/icons/2048.png',
         path: '/pages/tools-2048/tools-2048'
       },
       {
         id: 'draw',
-        name: '涂鸦板',
+        name: '解压涂鸦板',
         icon: '/images/icons/draw.png',
         path: '/pages/tools-draw/tools-draw'
       }

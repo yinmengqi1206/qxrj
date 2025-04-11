@@ -1,27 +1,33 @@
-<!--pixel.wxml-->
-<canvas canvas-id="myCanvas" style="height: calc(100vh - {{canvasHeight}}px)" disable-scroll="true" bindtouchend="toucheEnd" bindtouchstart="touchStart" bindtouchmove="touchMove"/>
+<!-- pixel.wxml -->
+<canvas canvas-id="myCanvas" style="height: calc(100vh - {{canvasHeight}}px)" disable-scroll="true" bindtouchend="toucheEnd" bindtouchstart="touchStart" bindtouchmove="touchMove" />
 <view class="bottom">
     <block wx:for="{{btnInfo}}" wx:key="{{index}}">
-        <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
+        <view class="list-item" data-type="{{item.type}}" bindtap="tapBtn">
+            <image src="{{item.background}}" style="width: 100%; height: 100%;" />
+        </view>
     </block>
 </view>
 <view class="choose-box" wx:if="{{width}}">
     <view class="text-center">单个格子边长: {{w}}</view>
-    <slider min="5" max="100" step="1" show-value="true" value="{{w}}" bindchange="changeWidth"/>
+    <slider min="5" max="100" step="1" show-value="true" value="{{w}}" bindchange="changeWidth" />
 </view>
 <view class="choose-box" wx:if="{{color}}">
     <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
-    <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor"/>
-    <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor"/>
-    <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor"/>
+    <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor" />
+    <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor" />
+    <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor" />
 </view>
 <view class="choose-box-flex" wx:if="{{clear}}">
     <view class="choose-item" bindtap="chooseEraser">
-        <view class="choose-img" style='background: url("http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2018/10/29/997c2bf5404e5abc809b42fe6bb902f9.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx; border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'></view>
+        <view class="choose-img" style='border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'>
+            <image src="/images/icons/chooseEraser.png" style="width: 40rpx; height: 40rpx; margin: 10rpx;" />
+        </view>
         <view>橡皮擦</view>
     </view>
     <view class="choose-item" bindtap="clearCanvas">
-        <view class="choose-img" style='background: url("http://static.jsososo.com/bmob-cdn-20716.b0.upaiyun.com/2018/10/29/33f80e334020a90b80e8cd8423cb8fbe.png") white no-repeat; background-size: 40rpx 40rpx;background-position: 10rpx 10rpx;'></view>
+        <view class="choose-img">
+            <image src="/images/icons/clearCanvas.png" style="width: 40rpx; height: 40rpx; margin: 10rpx;" />
+        </view>
         <view>清空</view>
     </view>
 </view>
