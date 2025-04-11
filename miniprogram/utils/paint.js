@@ -3,12 +3,14 @@ const App = getApp();
 const recordPoints = App.globalData.recordPoints;
 
 // 记录一条线的起始点，顺便记录一下这条线的颜色和为宽度
-export const startTouch = (e, color, width) => {
+export const startTouch = (e, color, width, _this) => {
   recordPoints.push([{
     x: e.touches[0].x,
     y: e.touches[0].y,
     color,
     width,
+    showHighLight: _this.data.showHighLight,
+    pageType: _this.data.pageType
   }]);
 };
 
@@ -45,13 +47,14 @@ export const reDraw = (_this) => {
   recordPoints.forEach(line => {
     if (!Array.isArray(line) || line.length === 0) return;
     
-    const { width, color, x, y } = line[0];
+    const { width, color, x, y, showHighLight, pageType } = line[0];
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
-
-    if (_this.data.pageType === 'highlighter' && !_this.data.eraser) {
+    
+    // 只使用线条自己的荧光状态，不再使用当前页面状态
+    if (showHighLight && !_this.data.eraser) {
       ctx.setShadow(0, 0, 30, color.replace(')', ', 0.6)').replace('rgb', 'rgba'));
     }
 

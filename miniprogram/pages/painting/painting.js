@@ -48,6 +48,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 清空上一次的绘制数据
+    clearPoints();
+    
     // 确定页面类型（普通的白板涂鸦和荧光涂鸦）
     const tempObj = {
       bgColor: options.pageType === 'whiteBoard' ? 'white' : 'black',
@@ -95,7 +98,7 @@ Page({
     const { r, g, b } = this.data;
     let color = `rgb(${r},${g},${b})`;
     let width = this.data.w;
-    startTouch(e, color, width);
+    startTouch(e, color, width, this);
   },
 
   touchMove: function (e) {
@@ -128,8 +131,10 @@ Page({
 
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
-    if ((pageType === 'highlighter' && !eraser) || (showHighLight && !eraser)) {
+    if (showHighLight && !eraser) {
       ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
+    } else {
+      ctx.setShadow(0, 0, 0, 'transparent');
     }
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
@@ -192,6 +197,6 @@ Page({
   },
 
   onShow() {
-    clearPoints();
+    // 不再在onShow清空数据，只在onLoad时清空
   },
 })
