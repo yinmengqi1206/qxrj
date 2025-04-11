@@ -160,12 +160,6 @@ slider {
 }
 
 /* 滑块美化 */
-.wx-slider-handle {
-  width: 36rpx !important;
-  height: 36rpx !important;
-  border-radius: 50% !important;
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.15) !important;
-}
 
 slider[data-color="r"] .wx-slider-handle {
   background: rgb(255, 100, 100) !important;

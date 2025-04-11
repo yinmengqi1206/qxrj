@@ -1,5 +1,6 @@
 import utils from "../../utils/paint-util";
-import {recordPointsFun, startTouch, drawBack} from "../../utils/paint";
+import {recordPointsFun, startTouch, drawBack, clearPoints} from "../../utils/paint";
+const App = getApp();
 // painting-2.js
 Page({
 
@@ -145,30 +146,44 @@ Page({
       return;
     }
 
-    const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
-    const drawPosition = [pX, pY, (cX + pX) / 2, (cY + pY) / 2];
+    const currentPoint = [e.touches[0].x, e.touches[0].y];
+    const midPoint = [(currentPoint[0] + prevPosition[0]) / 2, (currentPoint[1] + prevPosition[1]) / 2];
+    
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
-
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
+    
     ctx.moveTo(...movePosition);
-    ctx.quadraticCurveTo(...drawPosition);
+    ctx.quadraticCurveTo(prevPosition[0], prevPosition[1], midPoint[0], midPoint[1]);
     ctx.stroke();
     ctx.draw(true);
 
-    recordPointsFun(movePosition, drawPosition)
+    recordPointsFun(e, {
+      prevPosition: prevPosition,
+      midPoint: midPoint,
+      currentPoint: currentPoint
+    })
 
     this.setData({
-      prevPosition: [cX, cY],
-      movePosition: [(cX + pX) / 2, (cY + pY) / 2]
+      prevPosition: currentPoint,
+      movePosition: midPoint
     });
   },
 
   clearCanvas: function () {
     let ctx = wx.createCanvasContext('myCanvas');
     ctx.clearRect(0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    
+    // 重新绘制背景图片
+    if (this.data.background) {
+      ctx.drawImage(this.data.background, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    }
     ctx.draw();
+    
+    // 清空记录的点
+    clearPoints();
+    
     this.setData({
       clear: false,
       canvasHeightLen: 0
@@ -184,9 +199,6 @@ Page({
   },
 
   drawBack() {
-    const ctx = wx.createCanvasContext('myCanvas');
-    ctx.drawImage(this.data.background, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
-    ctx.draw();
     drawBack(this);
   },
 

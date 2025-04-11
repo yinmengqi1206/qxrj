@@ -15,10 +15,13 @@ export const startTouch = (e, color, width) => {
 // 记录一条线内的每个点
 export const recordPointsFun = (move, draw) => {
   const l = recordPoints.length;
+  if (!move?.touches?.[0] || !draw?.prevPosition || !draw?.midPoint) return;
+  
   if (l > 0 && Array.isArray(recordPoints[l-1])) {
     recordPoints[l-1].push({
-      move: [move.touches[0].x, move.touches[0].y],
-      draw: [draw.prevPosition[0], draw.prevPosition[1], (move.touches[0].x + draw.prevPosition[0]) / 2, (move.touches[0].y + draw.prevPosition[1]) / 2]
+      move: draw.movePosition || move.touches[0],
+      control: draw.prevPosition,
+      end: draw.midPoint
     });
   }
 };
@@ -28,20 +31,23 @@ export const reDraw = (_this) => {
   const ctx = wx.createCanvasContext('myCanvas');
   // 清空画布
   ctx.clearRect(0, 0, 10000, 10000);
-  ctx.setFillStyle(_this.data.bgColor || 'white');
-  ctx.fillRect(0, 0, 10000, 10000);
+  
+  // 如果有背景图片，先绘制背景图片
+  if (_this.data.background) {
+    ctx.drawImage(_this.data.background, 0, 0, _this.data.canvasWidth, _this.data.canvasHeight);
+  } else {
+    // 没有背景图片时才填充白色背景
+    ctx.setFillStyle(_this.data.bgColor || 'white');
+    ctx.fillRect(0, 0, 10000, 10000);
+  }
 
+  // 先绘制所有内容，最后一次性draw
   recordPoints.forEach(line => {
     if (!Array.isArray(line) || line.length === 0) return;
     
     const { width, color, x, y } = line[0];
-    // 线的宽度
     ctx.setLineWidth(width);
-    // 线的颜色
     ctx.setStrokeStyle(color);
-    // 起始位置
-    ctx.moveTo(x, y);
-    // 这些样式就默认了
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
 
@@ -49,17 +55,24 @@ export const reDraw = (_this) => {
       ctx.setShadow(0, 0, 30, color.replace(')', ', 0.6)').replace('rgb', 'rgba'));
     }
 
+    let lastPoint = [line[0].x, line[0].y];
+    ctx.beginPath();
+    ctx.moveTo(...lastPoint);
+    
     line.forEach((p, i) => {
       if (i === 0) return;
-      if (!p.move || !p.draw) return;
+      if (!p.control || !p.end) return;
       
-      ctx.moveTo(p.move[0], p.move[1]);
-      ctx.quadraticCurveTo(p.draw[0], p.draw[1], p.draw[2], p.draw[3]);
-      ctx.stroke();
+      ctx.quadraticCurveTo(p.control[0], p.control[1], p.end[0], p.end[1]);
+      lastPoint = p.end;
     });
-    ctx.draw(true);
+    
+    ctx.stroke();
   });
 
+  // 最后统一draw一次
+  ctx.draw();
+  
   _this.setData({
     prevPosition: [-1, -1]
   });
