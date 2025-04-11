@@ -61,9 +61,14 @@ Page({
     this.setData({
       ...tempObj
     })
-    // 建立空白页并检查权限（如果非填充空白会发现保存为透明）
+    // 获取系统信息设置canvas尺寸
+    const systemInfo = wx.getSystemInfoSync();
+    this.canvasWidth = systemInfo.windowWidth;
+    this.canvasHeight = systemInfo.windowHeight - 60; // 减去底部工具栏高度
+    
+    // 建立空白页并检查权限
     let ctx = wx.createCanvasContext('myCanvas');
-    ctx.rect(0, 0, 10000, 10000);
+    ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
     ctx.setFillStyle(tempObj.bgColor);
     ctx.fill();
     ctx.draw();
@@ -109,7 +114,17 @@ Page({
       width = 20;
     }
 
-    const [pX, pY, cX, cY] = [...prevPosition, e.touches[0].x, e.touches[0].y];
+    // 获取当前触摸点坐标
+    const currentX = e.touches[0].x;
+    const currentY = e.touches[0].y;
+
+    // 使用前一点和当前点计算贝塞尔曲线控制点
+    const controlX = prevPosition[0];
+    const controlY = prevPosition[1];
+    
+    // 使用当前点和控制点的中点作为终点，使线条更平滑
+    const endX = (currentX + controlX) / 2;
+    const endY = (currentY + controlY) / 2;
 
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
@@ -118,14 +133,19 @@ Page({
     }
     ctx.setLineCap('round');
     ctx.setLineJoin('round');
+    
+    // 从上一个移动点开始
     ctx.moveTo(...movePosition);
-    ctx.quadraticCurveTo(pX, pY, (cX + pX) / 2, (cY + pY) / 2);
+    
+    // 使用贝塞尔曲线创建平滑路径
+    ctx.quadraticCurveTo(controlX, controlY, endX, endY);
     ctx.stroke();
     ctx.draw(true);
 
+    // 更新位置
     this.setData({
-      prevPosition: [cX, cY],
-      movePosition: [(cX + pX) / 2, (cY + pY) / 2]
+      prevPosition: [currentX, currentY],
+      movePosition: [endX, endY]
     });
     recordPointsFun(e, this);
   },
@@ -153,7 +173,7 @@ Page({
   clearCanvas: function () {
     // 重置
     let ctx = wx.createCanvasContext('myCanvas');
-    ctx.rect(0, 0, 500, 800);
+    ctx.rect(0, 0, this.canvasWidth, this.canvasHeight);
     ctx.setFillStyle(this.data.bgColor);
     ctx.fill();
     ctx.draw();

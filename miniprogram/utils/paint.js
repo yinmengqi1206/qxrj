@@ -30,7 +30,7 @@ export const recordPointsFun = (move, draw) => {
 export const reDraw = (_this) => {
   const ctx = wx.createCanvasContext('myCanvas');
   // 清空画布
-  ctx.clearRect(0, 0, 10000, 10000);
+  ctx.clearRect(0, 0, _this.canvasWidth, _this.canvasHeight);
   
   // 如果有背景图片，先绘制背景图片
   if (_this.data.background) {
@@ -38,7 +38,7 @@ export const reDraw = (_this) => {
   } else {
     // 没有背景图片时才填充白色背景
     ctx.setFillStyle(_this.data.bgColor || 'white');
-    ctx.fillRect(0, 0, 10000, 10000);
+    ctx.fillRect(0, 0, _this.canvasWidth, _this.canvasHeight);
   }
 
   // 先绘制所有内容，最后一次性draw
