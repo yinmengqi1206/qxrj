@@ -49,7 +49,7 @@ Page({
    */
   onLoad: function (options) {
     // 清空上一次的绘制数据
-    clearPoints();
+    clearPoints(this);
     
     // 确定页面类型（普通的白板涂鸦和荧光涂鸦）
     const tempObj = {
@@ -131,7 +131,7 @@ Page({
 
     ctx.setLineWidth(width);
     ctx.setStrokeStyle(color);
-    if (showHighLight && !eraser) {
+    if ((pageType === 'highlighter' || showHighLight) && !eraser) {
       ctx.setShadow(0, 0, 30, `rgba(${r},${g},${b},0.6)`);
     } else {
       ctx.setShadow(0, 0, 0, 'transparent');

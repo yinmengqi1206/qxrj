@@ -130,7 +130,7 @@ Page({
     const { r, g, b } = this.data;
     let color = `rgb(${r},${g},${b})`;
     let width = this.data.w;
-    startTouch(e, color, width);
+    startTouch(e, color, width, this);
   },
 
   touchMove: function (e) {
@@ -159,11 +159,7 @@ Page({
     ctx.stroke();
     ctx.draw(true);
 
-    recordPointsFun(e, {
-      prevPosition: prevPosition,
-      midPoint: midPoint,
-      currentPoint: currentPoint
-    })
+    recordPointsFun(e, this);
 
     this.setData({
       prevPosition: currentPoint,
@@ -182,7 +178,7 @@ Page({
     ctx.draw();
     
     // 清空记录的点
-    clearPoints();
+    clearPoints(this);
     
     this.setData({
       clear: false,

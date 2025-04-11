@@ -1,10 +1,15 @@
 
-const App = getApp();
-const recordPoints = App.globalData.recordPoints;
+// 每个页面实例保存自己的points数据
+const initPoints = (_this) => {
+  if (!_this.recordPoints) {
+    _this.recordPoints = [];
+  }
+};
 
 // 记录一条线的起始点，顺便记录一下这条线的颜色和为宽度
 export const startTouch = (e, color, width, _this) => {
-  recordPoints.push([{
+  initPoints(_this);
+  _this.recordPoints.push([{
     x: e.touches[0].x,
     y: e.touches[0].y,
     color,
@@ -15,15 +20,17 @@ export const startTouch = (e, color, width, _this) => {
 };
 
 // 记录一条线内的每个点
-export const recordPointsFun = (move, draw) => {
-  const l = recordPoints.length;
-  if (!move?.touches?.[0] || !draw?.prevPosition || !draw?.midPoint) return;
+export const recordPointsFun = (move, _this) => {
+  if (!move?.touches?.[0] || !_this?.data?.prevPosition) return;
   
-  if (l > 0 && Array.isArray(recordPoints[l-1])) {
-    recordPoints[l-1].push({
-      move: draw.movePosition || move.touches[0],
-      control: draw.prevPosition,
-      end: draw.midPoint
+  initPoints(_this);
+  const l = _this.recordPoints.length;
+  if (l > 0 && Array.isArray(_this.recordPoints[l-1])) {
+    _this.recordPoints[l-1].push({
+      move: _this.data.movePosition,
+      control: _this.data.prevPosition,
+      end: [(move.touches[0].x + _this.data.prevPosition[0]) / 2, 
+            (move.touches[0].y + _this.data.prevPosition[1]) / 2]
     });
   }
 };
@@ -34,17 +41,20 @@ export const reDraw = (_this) => {
   // 清空画布
   ctx.clearRect(0, 0, _this.canvasWidth, _this.canvasHeight);
   
-  // 如果有背景图片，先绘制背景图片
+  // 重新绘制背景
   if (_this.data.background) {
+    // 对于painting2，使用已设置的canvas尺寸重新绘制背景图
     ctx.drawImage(_this.data.background, 0, 0, _this.data.canvasWidth, _this.data.canvasHeight);
   } else {
-    // 没有背景图片时才填充白色背景
+    // 对于painting，填充背景色
     ctx.setFillStyle(_this.data.bgColor || 'white');
     ctx.fillRect(0, 0, _this.canvasWidth, _this.canvasHeight);
   }
+  ctx.draw(true);  // 先画背景
 
   // 先绘制所有内容，最后一次性draw
-  recordPoints.forEach(line => {
+  initPoints(_this);
+  _this.recordPoints.forEach(line => {
     if (!Array.isArray(line) || line.length === 0) return;
     
     const { width, color, x, y, showHighLight, pageType } = line[0];
@@ -73,8 +83,8 @@ export const reDraw = (_this) => {
     ctx.stroke();
   });
 
-  // 最后统一draw一次
-  ctx.draw();
+  // 再绘制线条
+  ctx.draw(true);
   
   _this.setData({
     prevPosition: [-1, -1]
@@ -83,13 +93,16 @@ export const reDraw = (_this) => {
 
 // 后退
 export const drawBack = (_this) => {
-  recordPoints.pop();
+  initPoints(_this);
+  _this.recordPoints.pop();
   reDraw(_this);
 };
 
-// 清空globalData里的点数据
-export const clearPoints = () => {
-  recordPoints.length = 0;
+// 清空页面的点数据
+export const clearPoints = (_this) => {
+  if (_this) {
+    _this.recordPoints = [];
+  }
 };
 
 export const clearDraw = (e, _this) => {
