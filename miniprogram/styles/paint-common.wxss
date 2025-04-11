@@ -71,7 +71,6 @@ canvas {
   border-top-left-radius: 24rpx;
   border-top-right-radius: 24rpx;
   box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
-  padding: 20rpx 0;
 }
 
 .color-box {

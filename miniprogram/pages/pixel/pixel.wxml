@@ -9,7 +9,7 @@
 </view>
 <view class="choose-box" wx:if="{{width}}">
     <view class="text-center">单个格子边长: {{w}}</view>
-    <slider min="5" max="100" step="1" show-value="true" value="{{w}}" bindchange="changeWidth" />
+    <slider min="5" max="100" data-color="r" step="1" show-value="true" value="{{w}}" bindchange="changeWidth" />
 </view>
 <view class="choose-box" wx:if="{{color}}">
     <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
