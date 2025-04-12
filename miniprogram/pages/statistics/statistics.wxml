@@ -1,5 +1,5 @@
 <!-- pages/statistics/statistics.wxml -->
-<wxs module="utils" src="../../utils/util.wxs"></wxs>
+<wxs module="utils" src="/utils/util.wxs"></wxs>
 <view class="container">
     <!-- Tabbar -->
     <view class="tabbar">
@@ -58,7 +58,7 @@
                 </view>
                 <view class="stats-card">
                     <text class="stats-label">最常见情绪</text>
-                    <image class="stats-emotion-icon" src="../../images/icons/{{mostFrequentEmotion}}.png" />
+                    <image class="stats-emotion-icon" src="/index/images/icons/{{mostFrequentEmotion}}.png" />
                 </view>
             </view>
             <!-- 情绪分布 -->
@@ -66,49 +66,49 @@
                 <text class="stats-title">情绪分布</text>
                 <view class="emotion-bars">
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/veryHappy.png" />
+                        <image class="bar-icon" src="/index/images/icons/veryHappy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.veryHappy / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.veryHappy}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/happy.png" />
+                        <image class="bar-icon" src="/index/images/icons/happy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.happy / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.happy}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/slightlyHappy.png" />
+                        <image class="bar-icon" src="/index/images/icons/slightlyHappy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.slightlyHappy / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.slightlyHappy}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/neutral.png" />
+                        <image class="bar-icon" src="/index/images/icons/neutral.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.neutral / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.neutral}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/slightlyUnhappy.png" />
+                        <image class="bar-icon" src="/index/images/icons/slightlyUnhappy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.slightlyUnhappy / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.slightlyUnhappy}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/unhappy.png" />
+                        <image class="bar-icon" src="/index/images/icons/unhappy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.unhappy / totalCount * 100) || 0}}%"></view>
                         </view>
                         <text class="bar-count">{{emotionStats.unhappy}}</text>
                     </view>
                     <view class="emotion-bar">
-                        <image class="bar-icon" src="../../images/icons/veryUnhappy.png" />
+                        <image class="bar-icon" src="/index/images/icons/veryUnhappy.png" />
                         <view class="bar-wrapper">
                             <view class="bar-fill" style="width: {{(emotionStats.veryUnhappy / totalCount * 100) || 0}}%"></view>
                         </view>
@@ -133,7 +133,7 @@
                     <view wx:for="{{item.emotions}}" wx:for-item="emotion" wx:for-index="emotionIndex" wx:key="emotionIndex" class="emotion-item" bindtap="showEmotionDetail" data-emotion="{{emotion}}">
                         <view class="emotion-time">{{utils.formatTime(emotion.timestamp)}}</view>
                         <view class="emotion-info">
-                            <image class="emotion-type-icon" src="../../images/icons/{{emotion.type}}.png" />
+                            <image class="emotion-type-icon" src="/index/images/icons/{{emotion.type}}.png" />
                             <view class="emotion-value">情绪值：{{emotion.value}}</view>
                         </view>
                     </view>
@@ -156,7 +156,7 @@
     <view class="emotion-detail-modal" wx:if="{{showModal}}">
         <view class="modal-content">
             <view class="modal-header">
-                <image class="emotion-icon" src="../../images/icons/{{selectedEmotion.type}}.png" />
+                <image class="emotion-icon" src="/index/images/icons/{{selectedEmotion.type}}.png" />
                 <view class="emotion-name">{{selectedEmotion.name}}</view>
                 <view class="emotion-name">
                     {{selectedEmotion.recordType === 'daily' ? utils.formatDate(selectedEmotion.timestamp): utils.formatDateTime(selectedEmotion.timestamp)}}

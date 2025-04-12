@@ -1,0 +1,40 @@
+<!-- pages/emotion-factors/emotion-factors.wxml -->
+<wxs module="utils" src="/utils/util.wxs"></wxs>
+<view class="container bg-gray-100">
+    <view class="header p-4 flex items-center bg-white">
+        <view class="back-icon text-blue-500" bindtap="goBack">
+            <text class="cuIcon-back"></text>
+        </view>
+        <view class="title text-xl font-medium text-center flex-1">影响因素</view>
+        <view class="w-6"></view>
+    </view>
+    <view class="p-4">
+        <view class="mb-4 flex items-center">
+            <!-- 情绪图标 -->
+            <view class="flex justify-center">
+                <image wx:if="{{selectedEmotion.type}}" src="../../images/icons/{{selectedEmotion.type}}.png" class="w-12 h-12 rounded-full flex items-center justify-center mr-4" />
+            </view>
+            <view>
+                <view class="font-medium">{{selectedEmotion.name}}</view>
+                <view class="text-gray-500">{{recordType === 'daily' ? '当日情绪' : '瞬时情绪'}}</view>
+            </view>
+        </view>
+        <view class="bg-white rounded-xl p-4 mb-4">
+            <view class="text-gray-500 mb-4">是什么影响了您的情绪？（可多选）</view>
+            <view wx:for="{{factorCategories}}" wx:key="index" class="mb-4">
+                <view class="flex flex-wrap">
+                    <view wx:for="{{item}}" wx:for-item="factor" wx:key="*this" class="{{utils.includes(selectedFactors,factor) ? 'tag tag-selected' : 'tag'}}" data-factor="{{factor}}" bindtap="toggleFactor">
+                        {{factor}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="bg-white rounded-xl p-4 mb-4">
+            <view class="text-gray-500 mb-2">更多情景（选填）</view>
+            <textarea class="w-full p-2 border border-gray-200 rounded-lg" placeholder="请描述更多情景..." bindinput="inputCustomContext" value="{{customContext}}" style="height: 100px;"></textarea>
+        </view>
+        <view class="fixed-bottom p-4 bg-white" style="position:relative">
+            <button bindtap="complete" class="btn btn-primary w-full">完成</button>
+        </view>
+    </view>
+</view>

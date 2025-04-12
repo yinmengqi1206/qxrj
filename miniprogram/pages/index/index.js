@@ -116,7 +116,7 @@ Page({
   
   startRecording: function() {
     wx.navigateTo({
-      url: '/pages/emotion-type/emotion-type'
+      url: '/index/pages/emotion-type/emotion-type'
     })
   },
 

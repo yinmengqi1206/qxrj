@@ -1,0 +1,34 @@
+<!-- painting-2.wxml -->
+<canvas canvas-id="myCanvas" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" wx:if="{{hasChoosedImg}}" style="height: {{(canvasHeightLen == 0) ? canvasHeight : canvasHeightLen}}px; width: {{canvasWidth}}px;" />
+<view class="failText" wx:if="{{!hasChoosedImg}}" bindtap="addImg">没有选择照片，点击重新选择</view>
+<view class="bottom">
+  <block wx:for="{{btnInfo}}" wx:key="{{index}}">
+    <view class="list-item" data-type="{{item.type}}" bindtap="tapBtn">
+      <image src="{{item.background}}" style="width: 100%; height: 100%;" />
+    </view>
+  </block>
+</view>
+<view class="choose-box" wx:if="{{width}}">
+  <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
+  <slider min="1" max="50" step="1" data-color="r" show-value="true" value="{{w}}" bindchange="changeWidth" />
+</view>
+<view class="choose-box" wx:if="{{color}}">
+  <view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
+  <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor" />
+  <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor" />
+  <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor" />
+</view>
+<view class="choose-box-flex" wx:if="{{clear}}">
+  <view class="choose-item" bindtap="drawBack">
+    <view class="choose-img" style='border: {{eraser ? "2px solid #888" : "2px solid transparent"}}'>
+      <image src="/tools/images/icons/drawBack.png" style="width: 26px; height: 26px; margin: 2px;" />
+    </view>
+    <view>撤销</view>
+  </view>
+  <view class="choose-item" bindtap="clearCanvas">
+    <view class="choose-img">
+      <image src="/tools/images/icons/clearCanvas.png" style="width: 26px; height: 26px; margin: 2px;" />
+    </view>
+    <view>清空</view>
+  </view>
+</view>

@@ -5,19 +5,19 @@ Page({
         id: '2048',
         name: '2048',
         icon: '/images/icons/2048.png',
-        path: '/pages/tools-2048/tools-2048'
+        path: '/tools/pages/tools-2048/tools-2048'
       },
       {
         id: 'draw',
         name: '解压涂鸦板',
         icon: '/images/icons/draw.png',
-        path: '/pages/tools-draw/tools-draw'
+        path: '/tools/pages/tools-draw/tools-draw'
       },
       {
         id: 'meditation',
         name: '正念训练',
         icon: '/images/icons/meditation.png',
-        path: '/pages/tools-meditation/tools-meditation'
+        path: '/tools/pages/tools-meditation/tools-meditation'
       }
     ]
   },

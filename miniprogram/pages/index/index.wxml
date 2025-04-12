@@ -23,7 +23,7 @@
         <!-- 有当日情绪时显示 -->
         <view wx:if="{{dailyEmotion}}" class="flex flex-col items-center mb-6">
             <!-- 情绪图标 -->
-            <image src="../../images/icons/{{dailyEmotion.type}}.png" class="w-20 h-20 rounded-full flex items-center justify-center mb-4" />
+            <image src="/index/images/icons/{{dailyEmotion.type}}.png" class="w-20 h-20 rounded-full flex items-center justify-center mb-4" />
             <view class="text-2xl font-bold mb-1">{{dailyEmotion.name}}</view>
             <view wx:if="{{dailyEmotion.factors.length > 0}}" class="mt-2 flex flex-wrap justify-center">
                 <view wx:for="{{dailyEmotion.factors}}" wx:key="*this" class="text-sm text-gray-500 bg-gray-100 rounded-full px-2 py-1 m-1">
@@ -52,7 +52,7 @@
             <block wx:if="{{momentaryEmotions.length > 0}}">
                 <view wx:for="{{momentaryEmotions}}" wx:key="id" class="flex items-center mb-4">
                     <!-- 情绪图标 -->
-                    <image src="../../images/icons/{{item.type}}.png" class="w-12 h-12 rounded-full flex items-center justify-center mr-4" />
+                    <image src="/index/images/icons/{{item.type}}.png" class="w-12 h-12 rounded-full flex items-center justify-center mr-4" />
                     <view class="flex-1">
                         <view class="font-medium">{{item.name}}</view>
                         <view wx:if="{{item.factors.length > 0}}" class="flex flex-wrap">

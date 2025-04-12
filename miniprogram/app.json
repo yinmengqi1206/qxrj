@@ -1,18 +1,40 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/emotion-type/emotion-type",
-    "pages/emotion-selector/emotion-selector",
-    "pages/emotion-details/emotion-details",
-    "pages/emotion-factors/emotion-factors",
-    "pages/statistics/statistics",
     "pages/tools/tools",
-    "pages/tools-2048/tools-2048",
-    "pages/tools-draw/tools-draw",
-    "pages/painting/painting",
-    "pages/painting2/painting2",
-    "pages/pixel/pixel",
-    "pages/tools-meditation/tools-meditation"
+    "pages/statistics/statistics"
+  ],
+  "preloadRule": {
+    "pages/index/index": {
+      "network": "all",
+      "packages": ["index"]
+    },
+    "pages/statistics/statistics": {
+      "network": "all",
+      "packages": ["index"]
+    }
+  },
+  "subPackages": [
+    {
+      "root": "index",
+      "pages": [
+        "pages/emotion-type/emotion-type",
+        "pages/emotion-selector/emotion-selector",
+        "pages/emotion-details/emotion-details",
+        "pages/emotion-factors/emotion-factors"
+      ]
+    },
+    {
+      "root": "tools",
+      "pages": [
+        "pages/tools-2048/tools-2048",
+        "pages/tools-draw/tools-draw",
+        "pages/tools-meditation/tools-meditation",
+        "pages/painting/painting",
+        "pages/painting2/painting2",
+        "pages/pixel/pixel"
+      ]
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",
