@@ -1,3 +1,4 @@
+const emotionData = require('../../utils/emotion-data.js');
 Page({
   data: {
     isPlaying: false,

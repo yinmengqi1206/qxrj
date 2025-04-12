@@ -1,5 +1,6 @@
 <wxs module="utils" src="../../utils/util.wxs"></wxs>
 <view class="container">
+    <image src="../../images/meditation.jpg" mode="aspectFill" class="background-image"></image>
     <view class="timer">
         <text class="time">
             {{isPlaying ? utils.formatTimeBySeconds(currentTime) : utils.formatTimeBySeconds(duration)}}
