@@ -1,5 +1,5 @@
-import utils from "../../../utils/paint-util";
-import {recordPointsFun, startTouch, drawBack, clearPoints} from "../../../utils/paint";
+import utils from "../../utils/paint-util.js";
+import {recordPointsFun, startTouch, drawBack, clearPoints} from '../../utils/paint.js';
 const App = getApp();
 // painting-2.js
 Page({

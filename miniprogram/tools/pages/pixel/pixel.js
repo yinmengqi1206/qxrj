@@ -1,4 +1,4 @@
-import utils from "../../../utils/paint-util";
+import utils from "../../utils/paint-util.js";
 // pixel.js
 Page({
 

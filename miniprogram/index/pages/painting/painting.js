@@ -1,5 +1,5 @@
-import utils from "../../../tools/utils/paint-util.js";
-import { recordPointsFun, startTouch, reDraw, drawBack, clearPoints, clearDraw } from '../../../tools/utils/paint.js';
+import utils from "/tools/utils/paint-util.js";
+import { recordPointsFun, startTouch, reDraw, drawBack, clearPoints, clearDraw } from '/tools/utils/paint.js';
 // painting.js
 Page({
 
