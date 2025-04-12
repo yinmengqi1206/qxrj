@@ -4,16 +4,6 @@
     "pages/tools/tools",
     "pages/statistics/statistics"
   ],
-  "preloadRule": {
-    "pages/index/index": {
-      "network": "all",
-      "packages": ["index"]
-    },
-    "pages/statistics/statistics": {
-      "network": "all",
-      "packages": ["index"]
-    }
-  },
   "subPackages": [
     {
       "root": "index",

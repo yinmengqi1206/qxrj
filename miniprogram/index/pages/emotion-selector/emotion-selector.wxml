@@ -14,7 +14,7 @@
         <view class="bg-white rounded-xl p-6">
             <!-- 情绪图标 -->
             <view class="flex justify-center mb-6">
-                <image src="../../images/icons/{{selectedEmotion.type}}.png" class="w-20 h-20 rounded-full flex items-center justify-center mb-4" />
+                <image src="/images/icons/{{selectedEmotion.type}}.png" class="w-20 h-20 rounded-full flex items-center justify-center mb-4" />
             </view>
             <!-- 情绪名称 -->
             <view class="text-center text-xl font-medium mb-4">{{selectedEmotion.name}}</view>

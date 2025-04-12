@@ -77,7 +77,7 @@ class EmotionBall {
         this.targetAlpha = 0.9
       }, Math.random() * 500)
     }
-    img.src = `/index/images/icons/${this.type}.png`
+    img.src = `/images/icons/${this.type}.png`
   }
 
   update(otherBalls) {
