@@ -1,3 +1,4 @@
+const emotionData = require('./emotion-data.js');
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -189,11 +190,22 @@ function _canvaseSaveToImg(_this) {
         success: function (r) {
           wx.hideLoading();
           wx.showToast({
-            title: '保存成功',
+            title: '保存成功,并帮您记录美好此刻',
           })
           _this.setData({
             saving: false,
           })
+          // 直接记录情绪
+          emotionData.addEmotion({
+            type: 'happy',
+            name: '愉快',
+            value: 85,
+            details: ['怡然',"惬意"],
+            factors: ['画画'],
+            customContext: '解压涂鸦板，开心每一天',
+            recordType: 'current',
+            timestamp: new Date().getTime()
+          });
         },
         // 失败弹窗
         fail: function (res) {
