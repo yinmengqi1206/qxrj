@@ -2,7 +2,7 @@ var includes = function (array, searchElement) {
     return array.indexOf(searchElement) !== -1
 }
 
-var formatDate = function formatTime(timestamp) {
+var formatDate = function formatDate(timestamp) {
     var date = getDate(timestamp)
     var year = date.getFullYear()
     var month = date.getMonth() + 1
@@ -36,9 +36,16 @@ var formatNumber = function(n) {
     return n[1] ? n : '0' + n
 }
 
+var formatTimeBySeconds = function(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+    return [minutes, remainingSeconds].map(formatNumber).join(':');
+}
+
 module.exports = {
     formatDate: formatDate,
     formatDateTime: formatDateTime,
     includes: includes,
-    formatTime: formatTime
+    formatTime: formatTime,
+    formatTimeBySeconds: formatTimeBySeconds
 }

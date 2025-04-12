@@ -12,6 +12,12 @@ Page({
         name: '解压涂鸦板',
         icon: '/images/icons/draw.png',
         path: '/pages/tools-draw/tools-draw'
+      },
+      {
+        id: 'meditation',
+        name: '正念训练',
+        icon: '/images/icons/meditation.png',
+        path: '/pages/tools-meditation/tools-meditation'
       }
     ]
   },

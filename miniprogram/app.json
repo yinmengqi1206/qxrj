@@ -11,7 +11,8 @@
     "pages/tools-draw/tools-draw",
     "pages/painting/painting",
     "pages/painting2/painting2",
-    "pages/pixel/pixel"
+    "pages/pixel/pixel",
+    "pages/tools-meditation/tools-meditation"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -50,5 +51,6 @@
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
     "calendar": "@lspriv/wx-calendar"
-  }
+  },
+  "requiredBackgroundModes": ["audio"]
 }

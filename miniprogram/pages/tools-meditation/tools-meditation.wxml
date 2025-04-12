@@ -1,0 +1,31 @@
+<wxs module="utils" src="../../utils/util.wxs"></wxs>
+<view class="container">
+    <view class="timer">
+        <text class="time">
+            {{isPlaying ? utils.formatTimeBySeconds(currentTime) : utils.formatTimeBySeconds(duration)}}
+        </text>
+    </view>
+    <view class="controls">
+        <!-- <view class="duration-selector" wx:if="{{!isPlaying}}">
+            <view class="duration-item {{duration === 300 ? 'active' : ''}}" bindtap="setDuration" data-duration="300">
+                5分钟
+            </view>
+            <view class="duration-item {{duration === 600 ? 'active' : ''}}" bindtap="setDuration" data-duration="600">
+                10分钟
+            </view>
+            <view class="duration-item {{duration === 900 ? 'active' : ''}}" bindtap="setDuration" data-duration="900">
+                15分钟
+            </view>
+        </view> -->
+        <view class="button {{isPlaying ? 'stop' : 'start'}}" bindtap="{{isPlaying ? 'stopMeditation' : 'startMeditation'}}">
+            {{isPlaying ? '停止' : '开始'}}
+        </view>
+    </view>
+    <view class="tips" wx:if="{{!isPlaying}}">
+        <text class="tip-title">正念训练小贴士</text>
+        <text class="tip-content">1. 找一个安静的地方，采取舒适的坐姿</text>
+        <text class="tip-content">2. 闭上眼睛，关注自己的呼吸</text>
+        <text class="tip-content">3. 让思绪自然流动，不执着于任何想法</text>
+        <text class="tip-content">4. 当走神时，温和地把注意力带回呼吸</text>
+    </view>
+</view>
