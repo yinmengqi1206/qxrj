@@ -276,7 +276,7 @@ Page({
     } else if (currentTab === 'week') {
       const today = new Date()
       const weekStart = new Date(today)
-      weekStart.setDate(today.getDate() - today.getDay()+1)
+      weekStart.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
       
       for (let i = 0; i < 7; i++) {
         const date = new Date(weekStart)
