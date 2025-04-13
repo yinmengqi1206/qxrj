@@ -43,9 +43,11 @@
         </view>
         <!-- 没有当日情绪时显示 -->
         <view wx:else class="flex flex-col items-center mb-6 p-8">
-            <view class="text-gray-500 mb-4">暂无每日心情记录</view>
-            <image class="index-icon" src="../../images/icons/emotion.png" />
-            <view class="text-gray-500 mb-4">点击开始记录您的每日心情</view>
+            <view class="text-center text-gray-500 p-4">暂无每日心情记录</view>
+            <view class="text-center text-gray-500 p-4" bindtap="startRecording">
+                <image class="index-icon" src="../../images/icons/emotion.png" />
+            </view>
+            <view class="text-center text-gray-500 p-4">点击开始记录您的每日心情</view>
         </view>
         <view class="border-t border-gray-200 pt-4">
             <view class="text-gray-500 mb-4">瞬时情绪</view>
@@ -77,7 +79,7 @@
             <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
                 暂无瞬时情绪记录
             </view>
-            <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
+            <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4" bindtap="startRecording">
                 <image class="index-icon" src="../../images/icons/emotion.png" />
             </view>
             <view wx:if="{{momentaryEmotions.length === 0}}" class="text-center text-gray-500 p-4">
