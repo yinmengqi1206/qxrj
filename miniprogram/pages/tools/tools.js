@@ -1,12 +1,12 @@
 Page({
   data: {
     tools: [
-      {
-        id: '2048',
-        name: '2048',
-        icon: '/images/icons/2048.png',
-        path: '/tools/pages/tools-2048/tools-2048'
-      },
+      // {
+      //   id: '2048',
+      //   name: '2048',
+      //   icon: '/images/icons/2048.png',
+      //   path: '/tools/pages/tools-2048/tools-2048'
+      // },
       {
         id: 'draw',
         name: '解压涂鸦板',
