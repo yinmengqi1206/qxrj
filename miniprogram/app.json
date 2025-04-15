@@ -17,7 +17,6 @@
     {
       "root": "tools",
       "pages": [
-        "pages/tools-2048/tools-2048",
         "pages/tools-draw/tools-draw",
         "pages/tools-meditation/tools-meditation",
         "pages/painting/painting",
