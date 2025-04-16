@@ -209,9 +209,10 @@ function _canvaseSaveToImg(_this) {
         },
         // 失败弹窗
         fail: function (res) {
+          console.error("保存图片失败:", res);
           wx.hideLoading();
           wx.showToast({
-            title: '保存失败',
+            title: '图片保存失败',
             icon: 'loading',
           })
           _this.setData({
@@ -221,11 +222,12 @@ function _canvaseSaveToImg(_this) {
       })
     },
     fail: function (res) {
+      console.error("图片生成失败", res);
       // canvas转图片失败
       wx.hideLoading();
       wx.showToast({
         icon: 'loading',
-        title: '保存失败',
+        title: '图片生成失败',
       })
     }
   })
