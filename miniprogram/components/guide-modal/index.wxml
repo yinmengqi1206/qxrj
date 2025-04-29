@@ -1,0 +1,29 @@
+<view class="guide-modal {{show ? 'show' : ''}}" catchtouchmove="true">
+    <view class="modal-content">
+        <!-- 关闭按钮 -->
+        <view class="close-btn" hover-class="close-btn-hover" bindtap="hide">×</view>
+        <block wx:if="{{!selectedEmotion}}" class="fade-in">
+            <!-- 情绪选择区域 -->
+            <view class="title">现在的心情如何？</view>
+            <view class="emotions-grid">
+                <view class="emotion-item" wx:for="{{['veryHappy', 'happy', 'slightlyHappy', 'neutral', 'slightlyUnhappy', 'unhappy', 'veryUnhappy']}}" wx:key="*this" bindtap="onEmotionSelect" data-type="{{item}}">
+                    <image class="emotion-icon" src="/images/icons/{{item}}.png" mode="aspectFit" />
+                </view>
+            </view>
+            <view class="skip-btn" bindtap="onSkip">随便看看</view>
+        </block>
+        <block wx:else>
+            <!-- 情绪反馈区域 -->
+            <view class="emotion-feedback">
+                <image class="selected-emotion" src="{{selectedEmotion.icon}}" mode="aspectFit" />
+                <view class="emotion-text">{{currentEmotionText}}</view>
+            </view>
+            <!-- 入口区域 -->
+            <view class="entrances" style="--total-entrances: {{entrances.length}}">
+                <view class="entrance-item" wx:for="{{entrances}}" wx:key="type" bindtap="onEntranceClick" data-type="{{item.type}}" data-path="{{item.path}}">
+                    <view class="entrance-text">{{item.text}}</view>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

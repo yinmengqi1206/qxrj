@@ -209,7 +209,7 @@ const calculateStats = (emotions) => {
 
 Page({
   data: {
-    currentTab: 'day',
+    currentTab: 'week',
     emotions: [],
     groupedByDay: [],
     showModal: false,

@@ -61,7 +61,8 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "calendar": "@lspriv/wx-calendar"
+    "calendar": "@lspriv/wx-calendar",
+    "guide-modal": "/components/guide-modal/index"
   },
   "requiredBackgroundModes": ["audio"]
 }

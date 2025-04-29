@@ -29,8 +29,14 @@ Page({
     // 如果你使用了其他插件，比如 WxCalendar.use(AnyPlugin)，则可以
     // const calendar = ... as CalendarExport<[typeof AnyPlugin]>;
   },
+  guideModal: null,
+
   onLoad: function() {
-    this.updateData(new Date(getApp().globalData.timestamp || Date.now()),true)
+    this.updateData(new Date(getApp().globalData.timestamp || Date.now()),true);
+    // 获取引导弹窗组件实例
+    this.guideModal = this.selectComponent('#guideModal');
+    // 显示引导弹窗
+    this.guideModal.show();
     // const stats = emotionData.getEmotionStats()
     // console.log('Emotion stats:', stats);
     // console.log("dailyEmotion", this.data.dailyEmotion)
