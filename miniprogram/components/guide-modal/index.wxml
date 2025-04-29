@@ -6,11 +6,11 @@
             <!-- 情绪选择区域 -->
             <view class="title">现在的心情如何？</view>
             <view class="emotions-grid">
-                <view class="emotion-item" wx:for="{{['veryHappy', 'happy', 'slightlyHappy', 'neutral', 'slightlyUnhappy', 'unhappy', 'veryUnhappy']}}" wx:key="*this" bindtap="onEmotionSelect" data-type="{{item}}">
+                <view class="emotion-item" wx:for="{{['veryHappy', 'happy', 'slightlyHappy', 'neutral', 'slightlyUnhappy', 'unhappy', 'veryUnhappy','home']}}" wx:key="*this" bindtap="onEmotionSelect" data-type="{{item}}">
                     <image class="emotion-icon" src="/images/icons/{{item}}.png" mode="aspectFit" />
                 </view>
             </view>
-            <view class="skip-btn" bindtap="onSkip">随便看看</view>
+            <!-- <view class="skip-btn" bindtap="onSkip">随便看看</view> -->
         </block>
         <block wx:else>
             <!-- 情绪反馈区域 -->

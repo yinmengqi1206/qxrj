@@ -145,6 +145,11 @@ Component({
 
     onEmotionSelect(e) {
       const type = e.currentTarget.dataset.type;
+      //如果type是home，直接hide
+      if (type === 'home') {
+        this.hide();
+        return;
+      }
       const emotionMap = {
         veryHappy: { name: '非常开心', value: 100 },
         happy: { name: '开心', value: 75 },
@@ -265,9 +270,5 @@ Component({
         });
       }
     },
-
-    onSkip() {
-      this.hide();
-    }
   }
 });
